@@ -10,8 +10,9 @@
 <hr />
 <div class="row" style="background-color: purple; color: white">
     <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form asp-action="Create" method="post">
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
                 <input asp-for="Title" class="form-control" />
@@ -29,7 +30,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="ImageURL" class="control-label"></label>
-                <input asp-for="ImageURL" class="form-control" />
+                <input asp-for="ImageURL" type="url" class="form-control" placeholder="https://example.com/image.jpg or /images/local.jpg" />
+                <small class="form-text text-light">Enter a full URL (https://...) or a local path like <code>/images/yourfile.jpg</code> (put files in <code>wwwroot/images</code>).</small>
                 <span asp-validation-for="ImageURL" class="text-danger"></span>
             </div>
             <div class="form-group">

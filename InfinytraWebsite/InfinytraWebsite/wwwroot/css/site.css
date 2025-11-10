@@ -2,6 +2,26 @@ html {
   font-size: 14px;
 }
 
+.albumBackground {
+    background-image: url('/images/tumblr_c6b2229289e094497a3cb5290cccd3ee_d18a35ce_540.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    color: white;
+    padding: 40px;
+}
+
+body {
+    background-image: url('/images/cyrene-hsr.gif');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    color: white;
+    padding: 40px;
+}
+
 @media (min-width: 768px) {
   html {
     font-size: 16px;

@@ -46,7 +46,9 @@ namespace InfinytraWebsite.Controllers
         // GET: Albums/Create
         public IActionResult Create()
         {
-            return View();
+            // Provide a default date so the form is pre-populated and model binding won't fail if user leaves it
+            var model = new Album { CreatedDate = DateTime.Today };
+            return View(model);
         }
 
         // POST: Albums/Create
