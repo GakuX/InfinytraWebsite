@@ -12,6 +12,16 @@ html {
     padding: 40px;
 }
 
+.albumBackground1 {
+    background-image: url('/images/f069407edab4219e34f36ea331d1eb2e.gif');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    color: white;
+    padding: 40px;
+}
+
 body {
     background-image: url('/images/cyrene-hsr.gif');
     background-size: cover;
