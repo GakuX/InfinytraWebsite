@@ -130,3 +130,14 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+/* Member avatar sizing: ensure consistent square images and cover crop */
+.profile-card .avatar,
+.avatar {
+  width: 96px;
+  height: 96px;
+  object-fit: cover;
+  border-radius: 6px;
+  flex-shrink: 0;
+  display: block;
+}
