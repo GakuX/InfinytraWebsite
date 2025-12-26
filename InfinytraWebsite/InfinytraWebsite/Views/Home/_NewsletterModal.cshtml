@@ -1,0 +1,39 @@
+﻿
+<div>
+    <h3 class="mb-2">Join the Newsletter</h3>
+
+    <form id="newsletterForm" method="post" action="/Home/NewsletterSignup">
+        <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input class="form-control" name="email" type="email" required />
+        </div>
+
+        <button class="btn btn-outline-light" type="submit">Sign up</button>
+    </form>
+
+    <div id="newsletterMsg" class="mt-3"></div>
+</div>
+
+<script>
+    $(function () {
+      $('#newsletterForm').on('submit', function (e) {
+        e.preventDefault();
+
+        var $form = $(this);
+        $('#newsletterMsg').html('Sending...');
+
+        $.post($form.attr('action'), $form.serialize())
+          .done(function (res) {
+            if (res && res.ok) {
+              $('#newsletterMsg').html('<div class="alert alert-success">You’re in. Welcome.</div>');
+              $form.hide();
+            } else {
+              $('#newsletterMsg').html('<div class="alert alert-warning">Please try again.</div>');
+            }
+          })
+          .fail(function () {
+            $('#newsletterMsg').html('<div class="alert alert-danger">Server error.</div>');
+          });
+      });
+    });
+</script>

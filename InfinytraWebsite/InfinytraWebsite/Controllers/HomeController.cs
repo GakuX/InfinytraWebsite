@@ -12,6 +12,27 @@ namespace InfinytraWebsite.Controllers
         {
             _logger = logger;
         }
+        public IActionResult ListenModal()
+        {
+            return PartialView("_ListenModal");
+        }
+
+        [HttpPost]
+        public IActionResult NewsletterSignup(string email)
+        {
+            // Later: validate + save to DB
+            if (string.IsNullOrWhiteSpace(email))
+                return Json(new { ok = false });
+
+            return Json(new { ok = true });
+        }
+
+
+        public IActionResult NewsletterModal()
+        {
+            return PartialView("_NewsletterModal");
+        }
+
 
         public IActionResult Index()
         {

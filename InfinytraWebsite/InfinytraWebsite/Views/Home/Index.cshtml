@@ -2,7 +2,118 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container-fluid homeback1">
+    
+
+    @* <div class="row">
+        <br />
+        <h1 style="text-align:center; padding-top: 20px; font-family: Bahnschrift">Welcome To Infinytra</h1>
+    </div>
+ *@
+
+    <div class="hero-content">
+        <h1 class="band-title">INFINYTRA</h1>
+        <p class="band-tagline">Atmospheric • Dark • Cinematic</p>
+    </div>
+
+
+    <div class="hero-buttons">
+        <a asp-controller="Albums" asp-action="Index" class="btn btn-outline-light">
+            Explore Albums
+        </a>
+        <a asp-controller="Home" asp-action="Contact" class="btn btn-outline-light">
+            Contact
+        </a>
+    </div>
+
+
+    <div class="about-preview">
+        <p>
+            Infinytra is a dark atmospheric metal project blending heavy guitars,
+            ambient textures, and cinematic storytelling.
+        </p>
+    </div>
+
+
+
+    <div class="featured-album">
+        <img src="/images/album-placeholder.jpg" alt="Album cover">
+        <h3>Latest Release</h3>
+        <p>Debut Album • 2025</p>
+
+
+        <div class="row mt-4">
+            <div class="col-12 d-flex justify-content-center gap-4">
+                <a asp-controller="Albums"
+                   asp-action="Index"
+                   class="btn btn-sm btn-light">
+                    View Album
+                </a>
+
+                <button class="btn btn-outline-light js-open-modal"
+                        data-url="/Home/ListenModal">
+                    Listen Now
+                </button>
+
+                <button class="btn btn-outline-secondary js-open-modal"
+                        data-url="/Home/NewsletterModal">
+                    Join Newsletter
+                </button>
+            </div>
+        </div>
+
+
+       
+        
+
+
+
+    </div>
+
+   
+
 </div>
+
+<!-- Trigger buttons -->
+
+
+<!-- Modal shell -->
+<div class="modal fade" id="homeModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="homeModalTitle">Loading...</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="homeModalBody">
+                Loading...
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(function () {
+          $(document).on('click', '.js-open-modal', function (e) {
+            e.preventDefault();
+            var url = $(this).data('url');
+
+            $('#homeModalTitle').text('Loading...');
+            $('#homeModalBody').html('Loading...');
+
+            $.get(url)
+              .done(function (html) {
+                $('#homeModalBody').html(html);
+              })
+              .fail(function () {
+                $('#homeModalBody').html('<div class="alert alert-danger">Could not load content.</div>');
+              });
+
+            var modal = new bootstrap.Modal(document.getElementById('homeModal'));
+            modal.show();
+          });
+        });
+    </script>
+}
+
