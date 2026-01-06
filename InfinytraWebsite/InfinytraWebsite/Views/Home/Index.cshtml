@@ -2,18 +2,19 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="container-fluid homeback1">
-    
+<div class="container-fluid homeback1 rounded-container">
+
 
     @* <div class="row">
         <br />
         <h1 style="text-align:center; padding-top: 20px; font-family: Bahnschrift">Welcome To Infinytra</h1>
     </div>
  *@
+ 
 
     <div class="hero-content">
         <h1 class="band-title">INFINYTRA</h1>
-        <p class="band-tagline">Atmospheric • Dark • Cinematic</p>
+        <p class="band-tagline">Welcome to the family</p>
     </div>
 
 
@@ -28,21 +29,20 @@
 
 
     <div class="about-preview">
-        <p>
-            Infinytra is a dark atmospheric metal project blending heavy guitars,
-            ambient textures, and cinematic storytelling.
+        <p style="font-weight:bold;">
+            Infinytra is a progressive-metal band thriving to create songs with different and unique sound
         </p>
     </div>
 
 
 
     <div class="featured-album">
-        <img src="/images/album-placeholder.jpg" alt="Album cover">
-        <h3>Latest Release</h3>
+        <img src="/images/f069407edab4219e34f36ea331d1eb2e.gif" alt="Album cover">
+        <h3>Check Our Latest Release!</h3>
         <p>Debut Album • 2025</p>
 
 
-        <div class="row mt-4">
+       @*  <div class="row mt-4">
             <div class="col-12 d-flex justify-content-center gap-4">
                 <a asp-controller="Albums"
                    asp-action="Index"
@@ -50,20 +50,37 @@
                     View Album
                 </a>
 
+                
+ *@
+
+
+
+        <div class="row">
+
+            <div class="col-12 d-flex justify-content-center gap-3 flex-wrap">
                 <button class="btn btn-outline-light js-open-modal"
                         data-url="/Home/ListenModal">
                     Listen Now
                 </button>
 
-                <button class="btn btn-outline-secondary js-open-modal"
+                <button class="btn btn-outline-light js-open-modal"
                         data-url="/Home/NewsletterModal">
                     Join Newsletter
                 </button>
             </div>
+
+            </div>
+
+           
+
+        </div>
+
+                
+            </div>
         </div>
 
 
-       
+
         
 
 
@@ -73,6 +90,9 @@
    
 
 </div>
+
+<br />
+<br />
 
 <!-- Trigger buttons -->
 

@@ -13,7 +13,7 @@ html {
 }
 
 .albumBackground1 {
-    background-image: url('/images/f069407edab4219e34f36ea331d1eb2e.gif');
+  
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -41,6 +41,14 @@ html {
 
 .band-title {
     font-size: 4rem;
+    letter-spacing: 6px;
+    font-family: Bahnschrift;
+    color: white;
+    text-shadow: 0 0 10px rgba(160, 0, 255, 0.6), 0 0 20px rgba(160, 0, 255, 0.4);
+}
+
+.band-title2 {
+   /* font-size: 4rem;*/
     letter-spacing: 6px;
     font-family: Bahnschrift;
     color: white;
@@ -109,7 +117,7 @@ body {
     background-repeat: no-repeat;
     min-height: 100vh;
     color: white;
-    padding: 40px;
+    padding: 0 0 40px; /* remove top padding so header sits at top; keep bottom padding */
 }
 
 @media (min-width: 768px) {
@@ -140,4 +148,45 @@ body {
   border-radius: 6px;
   flex-shrink: 0;
   display: block;
+}
+
+/* Local fix: remove unintended top spacing above header without changing global body padding */
+.band-nav {
+  position: sticky;
+  top: 0;
+  z-index: 1030; /* ensure above content */
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Footer styling: black background, light text, padding, and link color */
+footer.footer {
+  background-color: #000000;
+  color: #e6e6e6;
+  padding: 1rem 0;
+  width: 100%;
+}
+footer.footer a {
+  color: #ffffff;
+  text-decoration: underline;
+}
+footer.footer .container {
+  max-width: 1140px;
+}
+
+/* New: rounded container utility for home and other pages */
+.rounded-container {
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 18px;
+  background: rgba(0,0,0,0.5);
+  padding: 24px;
+  /* add top spacing so container clears the header */
+  margin-top: 60px;
+  margin-bottom: 60px;
+}
+@media (max-width: 576px) {
+  .rounded-container {
+    margin-top: 70px;
+    padding: 18px;
+  }
 }
