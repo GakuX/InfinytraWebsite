@@ -1,42 +1,26 @@
 ﻿@model InfinytraWebsite.Models.Member
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = Model?.Name ?? "Member";
 }
 
-<h1>Details</h1>
+<div class="container py-4">
+    <a asp-action="Index" class="btn btn-sm btn-link mb-3">Back to list</a>
 
-<div>
-    <h4>Member</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Instrument)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Instrument)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PhotoURL)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PhotoURL)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <div class="card p-3">
+        <div class="d-flex gap-3 align-items-start">
+            <img src="@(string.IsNullOrWhiteSpace(Model.PhotoURL) ? Url.Content("~/images/placeholder.png") : Url.Content(Model.PhotoURL))"
+                 alt="@Model.Name" class="img-thumbnail" style="width:140px; height:140px; object-fit:cover;" />
+            <div>
+                <h2>@Model.Name</h2>
+                <p class="text-muted">@Model.Instrument</p>
+                <p>@Model.Description</p>
+
+                <div class="mt-3">
+                    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-sm btn-secondary">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-sm btn-danger">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

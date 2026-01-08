@@ -1,213 +1,133 @@
 ﻿@model IEnumerable<InfinytraWebsite.Models.Member>
 
 @{
-    ViewData["Title"] = "Index";
+    // ViewData["Title"] = "Band Members";
+    ViewData["BodyClass"] = "members-body-bg";
 }
 
-@* <h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Instrument)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PhotoURL)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Instrument)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PhotoURL)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table> *@
+<body class="members-body-bg">
 
-<div class="albumBackground1">
-    <!DOCTYPE html>
-    <html>
+    <div class="">
+        <div class="container py-5">
+            <h1 class="text-center text-white mb-4">Band Members</h1>
 
-    <head>
 
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-              integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-              crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <!--Style CSS-->
-        <link rel="stylesheet" type="text/css" href="styles.css">
 
-        <style>
+            <div class="row g-3">
+                @foreach (var item in Model)
+                {
+                    <div class="col-12 col-sm-6 col-md-3 d-flex align-items-stretch">
+                        <div class="w-100 p-3 d-flex flex-row align-items-start "
+                             style="background-image: url('@item.ImageURL');">
 
-        </style>
+                            <img class="avatar" src="@item.PhotoURL" alt="@item.Name" />
 
-    </head>
+                            <div class="profile-body ms-3">
+                                <h5 class="profile-name mb-1">@item.Name</h5>
 
-    <body style="">
+                                <p style="font-weight: bold; padding-top: 10px;">@item.Role</p>
 
-        <!--Mon header-->
-        <header class="container-fluid my-6">
+                                <div class="card profile-card mt-3">
+                                    <p style="font-weight: bold; text-shadow: 0 0 10px rgba(160, 0, 255, 0.6), 0 0 20px rgba(160, 0, 255, 0.4);">
+                                        @item.Description
+                                    </p>
 
-            <!-- ...existing code... -->
-            <div class="row g-3 container-fluid" style="background-color: #000; color: #fff; padding: 2rem;">
-
-                <div class="col-12 col-sm-6 col-md-3 d-flex align-items-stretch">
-                    <div class="card profile-card w-100 p-3 d-flex align-items-start">
-                        <img class="avatar" src="~/images/garylogoimage.jpg" alt="Gary Tjokro">
-                        <div class="profile-body ms-3">
-                            <h5 class="profile-name">Gary Tjokro</h5>
-                            <div class="profile-role">Lead Guitarist</div>
-                            <p class="profile-bio mb-2"></p>
-                            <div class="profile-social">
-                                <a href="#" class="me-2 text-decoration-none text-reset"><i class="fa-brands fa-instagram"></i></a>
-                                <a href="#" class="me-2 text-decoration-none text-reset"><i class="fa-brands fa-twitter"></i></a>
-                                <a href="#" class="text-decoration-none text-reset"><i class="fa-solid fa-music"></i></a>
+                                    <a asp-controller="Members"
+                                       asp-action="Details"
+                                       asp-route-id="@item.Id"
+                                       class="btn btn-sm btn-light">
+                                        Details
+                                    </a>
+                                </div>
                             </div>
+
                         </div>
                     </div>
-                </div>
+                }
+            </div>
 
-                <div class="col-12 col-sm-6 col-md-3 d-flex align-items-stretch">
-                    <div class="card profile-card w-100 p-3 d-flex align-items-start">
-                        <img class="avatar" src="/images/adan.jpg" alt="Maya Chen">
+
+
+             @*    <div class="col-12 col-sm-6 col-md-3 d-flex align-items-stretch">
+                    <div class="card profile-card w-100 p-3 d-flex flex-row align-items-start">
+                        <img class="avatar" src="~/images/adan.jpg" alt="Adan Riasat" />
                         <div class="profile-body ms-3">
-                            <h5 class="profile-name">Adan Riasat</h5>
-                            <div class="profile-role">Rhythym Guitar and vocalist</div>
-                            <p class="profile-bio mb-2"></p>
+                            <h5 class="profile-name mb-1">Adan Riasat</h5>
+                            <p style="font-weight: bold;">
+                                Rhythm Guitar and Vocal
+                            </p>
+
                             <div class="profile-social">
                                 <a href="#" class="me-2 text-decoration-none text-reset"><i class="fa-brands fa-spotify"></i></a>
                                 <a href="#" class="me-2 text-decoration-none text-reset"><i class="fa-brands fa-youtube"></i></a>
                                 <a href="#" class="text-decoration-none text-reset"><i class="fa-solid fa-person-booth"></i></a>
                             </div>
+                          
+
+                            <br />
+
+                            <p>The rhythm guitarist of the band Infinytra</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-12 col-sm-6 col-md-3 d-flex align-items-stretch">
-                    <div class="card profile-card w-100 p-3 d-flex align-items-start">
-                        <img class="avatar" src="/images/fernando.jpg" alt="Fernando Trujillo">
+                    <div class="card profile-card w-100 p-3 d-flex flex-row align-items-start">
+                        <img class="avatar" src="~/images/fernando.jpg" alt="Fernando Trujillo" />
                         <div class="profile-body ms-3">
-                            <h5 class="profile-name">Fernando Trujillo</h5>
-                            <div class="profile-role">Drums & Percussion</div>
-                            <p class="profile-bio mb-2"></p>
+                            <h5 class="profile-name mb-1">Fernando Trujillo</h5>
+                            <p style="font-weight: bold;">
+                             Drums and Cymbalist
+                            </p>
                             <div class="profile-social">
                                 <a href="#" class="me-2 text-decoration-none text-reset"><i class="fa-solid fa-drum"></i></a>
                                 <a href="#" class="text-decoration-none text-reset"><i class="fa-solid fa-microphone-lines"></i></a>
                             </div>
+
+                            <br />
+
+                            The drummer of the band Infinytra
+                          
                         </div>
                     </div>
                 </div>
 
+
+
                 <div class="col-12 col-sm-6 col-md-3 d-flex align-items-stretch">
-                    <div class="card profile-card w-100 p-3 d-flex align-items-start">
-                        <img class="avatar" src="/images/alhassan.jpg" alt="Alhassan Shnoot">
+                    <div class="card profile-card w-100 p-3 d-flex flex-row align-items-start">
+                        <img class="avatar" src="~/images/alhassan.jpg" alt="Alhassan Shnoot" />
                         <div class="profile-body ms-3">
-                            <h5 class="profile-name">Alhassan Shnoot</h5>
-                            <div class="profile-role">Bass & Backing Vocals</div>
-                            <p class="profile-bio mb-2"></p>
+                            <h5 class="profile-name mb-1">Alhassan Shnoot</h5>
+                      
+                            <p style="font-weight: bold;">
+                                Bass guitar and Backing Vocals
+                            </p>
                             <div class="profile-social">
                                 <a href="#" class="me-2 text-decoration-none text-reset"><i class="fa-brands fa-soundcloud"></i></a>
                                 <a href="#" class="text-decoration-none text-reset"><i class="fa-solid fa-headphones"></i></a>
                             </div>
+
+
+                            <br />
+
+                            The bassist of Infinytra
+
+                           ( i dont think bro is coming back )
+                         
                         </div>
                     </div>
-                </div>
+                </div> *@
 
-                <!-- ...existing code... -->
+
+                
+               
+
             </div>
-            <!-- ...existing code... -->
-
-        </header>
-
-        <main class="container">
+        </div>
+    </div>
 
 
-
-
-
-
-
-
-
-        </main>
-
-        <footer class="container-fluid ">
-        </footer>
-
-
-
-
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-                integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-                crossorigin="anonymous"></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    </body>
-
-
-
-</html>
-
-</div>
+</body>
 

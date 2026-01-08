@@ -41,6 +41,55 @@ namespace InfinytraWebsite
                 }
             }
 
+            using (var scope = app.Services.CreateScope())
+            {
+                var context = scope.ServiceProvider.GetRequiredService<BandContext>();
+
+                // Ensure DB exists / migrations applied (optional)
+                // context.Database.Migrate();
+
+                if (!context.Members.Any())
+                {
+                    context.Members.AddRange(
+                        new Member
+                        {
+                            Name = "Gary Tjokro",
+                            Role = "Lead Guitar",
+                            Description = "Lead guitarist of Infinytra, focused on melodic solos and heavy riffs.",
+                            PhotoURL = "/images/garylogoimage.jpg"
+                            , Instrument = "",
+                            ImageURL = "/images/redmask.png"
+                        },
+                        new Member
+                        {
+                            Name = "Adan Riasat",
+                            Role = "Rhythm Guitar & Vocals",
+                            Description = "Rhythm guitarist and vocalist driving the core sound of the band.",
+                          PhotoURL = "/images/adan.jpg", Instrument ="",
+                            ImageURL = "/images/purplemask.png"
+                        },
+                        new Member
+                        {
+                            Name = "Fernando Trujillo",
+                            Role = "Drums & Percussion",
+                            Description = "Drummer and percussionist bringing power and precision to Infinytra.",
+                            PhotoURL = "/images/fernando.jpg", Instrument="", ImageURL= "/images/whitemask.png"
+                        },
+                        new Member
+                        {
+                            Name = "Alhassan Shnoot",
+                            Role = "Bass & Backing Vocals",
+                            Description = "Bassist providing low-end weight and backing vocals.",
+                            PhotoURL = "/images/alhassan.jpg", Instrument="",
+                            ImageURL = "/images/orangemask.png"
+                        }
+                    );
+
+                    context.SaveChanges();
+                }
+            }
+
+
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {

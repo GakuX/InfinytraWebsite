@@ -26,22 +26,22 @@ namespace InfinytraWebsite.Controllers
         }
 
         // GET: Members/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+        //public async Task<IActionResult> Details(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            var member = await _context.Members
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (member == null)
-            {
-                return NotFound();
-            }
+        //    var member = await _context.Members
+        //        .FirstOrDefaultAsync(m => m.Id == id);
+        //    if (member == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return View(member);
-        }
+        //    return View(member);
+        //}
 
         // GET: Members/Create
         public IActionResult Create()
@@ -64,6 +64,19 @@ namespace InfinytraWebsite.Controllers
             }
             return View(member);
         }
+
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+                return NotFound();
+
+            var member = await _context.Members.FirstOrDefaultAsync(m => m.Id == id);
+            if (member == null)
+                return NotFound();
+
+            return View(member);
+        }
+
 
         // GET: Members/Edit/5
         public async Task<IActionResult> Edit(int? id)
