@@ -12,7 +12,7 @@ namespace InfinytraWebsite
         {
             var builder = WebApplication.CreateBuilder(args);
 
-     
+
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
@@ -48,68 +48,166 @@ namespace InfinytraWebsite
                 // Ensure DB exists / migrations applied (optional)
                 // context.Database.Migrate();
 
-                if (!context.Members.Any())
+                //    if (!context.Members.Any())
+                //    {
+                //        context.Members.AddRange(
+                //            new Member
+                //            {
+                //                Name = "Gary Tjokro",
+                //                Role = "Lead Guitar",
+                //                Description = "Lead guitarist of Infinytra, focused on melodic solos and heavy riffs.",
+                //                PhotoURL = "/images/garylogoimage.jpg"
+                //                , Instrument = "Jackson King V",
+                //                ImageURL = "/images/redmask.png"
+                //            },
+                //            new Member
+                //            {
+                //                Name = "Adan Riasat",
+                //                Role = "Rhythm Guitar & Vocals",
+                //                Description = "Rhythm guitarist and vocalist driving the core sound of the band.",
+                //              PhotoURL = "/images/adan.jpg", Instrument ="Epiphone SG",
+                //                ImageURL = "/images/purplemask.png"
+                //            },
+                //            new Member
+                //            {
+                //                Name = "Fernando Trujillo",
+                //                Role = "Drums & Percussion",
+                //                Description = "Drummer and percussionist bringing power and precision to Infinytra.",
+                //                PhotoURL = "/images/fernando.jpg", Instrument="Drums", ImageURL= "/images/whitemask.png"
+                //            },
+                //            new Member
+                //            {
+                //                Name = "Alhassan Shnoot",
+                //                Role = "Bass & Backing Vocals",
+                //                Description = "Bassist providing low-end weight and backing vocals.",
+                //                PhotoURL = "/images/alhassan.jpg", Instrument="Bass",
+                //                ImageURL = "/images/orangemask.png"
+                //            }
+                //        );
+
+                //        context.SaveChanges();
+                //    }
+                //}
+
+                var members = context.Members.ToList();
+
+                // Gary
+                var gary = members.FirstOrDefault(m => m.Name == "Gary Tjokro");
+                if (gary == null)
                 {
-                    context.Members.AddRange(
-                        new Member
-                        {
-                            Name = "Gary Tjokro",
-                            Role = "Lead Guitar",
-                            Description = "Lead guitarist of Infinytra, focused on melodic solos and heavy riffs.",
-                            PhotoURL = "/images/garylogoimage.jpg"
-                            , Instrument = "",
-                            ImageURL = "/images/redmask.png"
-                        },
-                        new Member
-                        {
-                            Name = "Adan Riasat",
-                            Role = "Rhythm Guitar & Vocals",
-                            Description = "Rhythm guitarist and vocalist driving the core sound of the band.",
-                          PhotoURL = "/images/adan.jpg", Instrument ="",
-                            ImageURL = "/images/purplemask.png"
-                        },
-                        new Member
-                        {
-                            Name = "Fernando Trujillo",
-                            Role = "Drums & Percussion",
-                            Description = "Drummer and percussionist bringing power and precision to Infinytra.",
-                            PhotoURL = "/images/fernando.jpg", Instrument="", ImageURL= "/images/whitemask.png"
-                        },
-                        new Member
-                        {
-                            Name = "Alhassan Shnoot",
-                            Role = "Bass & Backing Vocals",
-                            Description = "Bassist providing low-end weight and backing vocals.",
-                            PhotoURL = "/images/alhassan.jpg", Instrument="",
-                            ImageURL = "/images/orangemask.png"
-                        }
-                    );
-
-                    context.SaveChanges();
+                    context.Members.Add(new Member
+                    {
+                        Name = "Gary Tjokro",
+                        Role = "Lead Guitar",
+                        Description = "Lead guitarist of Infinytra, focused on melodic solos and heavy riffs.",
+                        PhotoURL = "/images/garylogoimage.jpg",
+                        Instrument = "Jackson King V",
+                        ImageURL = "/images/redmask.png"
+                    });
                 }
+                else
+                {
+                    gary.Role = "Lead Guitar";
+                    gary.Description = "Lead guitarist of Infinytra, focused on melodic solos and heavy riffs.";
+                    gary.PhotoURL = "/images/garylogoimage.jpg";
+                    gary.Instrument = "Jackson King V";
+                    gary.ImageURL = "/images/redmask.png";
+                }
+
+                // Adan
+                var adan = members.FirstOrDefault(m => m.Name == "Adan Riasat");
+                if (adan == null)
+                {
+                    context.Members.Add(new Member
+                    {
+                        Name = "Adan Riasat",
+                        Role = "Rhythm Guitar & Vocals",
+                        Description = "Rhythm guitarist and vocalist driving the core sound of the band.",
+                        PhotoURL = "/images/adan.jpg",
+                        Instrument = "Epiphone SG",
+                        ImageURL = "/images/purplemask.png"
+                    });
+                }
+                else
+                {
+                    adan.Role = "Rhythm Guitar & Vocals";
+                    adan.Description = "Rhythm guitarist and vocalist driving the core sound of the band.";
+                    adan.PhotoURL = "/images/adan.jpg";
+                    adan.Instrument = "Epiphone SG";
+                    adan.ImageURL = "/images/purplemask.png";
+                }
+
+                // Fernando
+                var fernando = members.FirstOrDefault(m => m.Name == "Fernando Trujillo");
+                if (fernando == null)
+                {
+                    context.Members.Add(new Member
+                    {
+                        Name = "Fernando Trujillo",
+                        Role = "Drums & Percussion",
+                        Description = "Drummer and percussionist bringing power and precision to Infinytra.",
+                        PhotoURL = "/images/fernando.jpg",
+                        Instrument = "Drums",
+                        ImageURL = "/images/whitemask.png"
+                    });
+                }
+                else
+                {
+                    fernando.Role = "Drums & Percussion";
+                    fernando.Description = "Drummer and percussionist bringing power and precision to Infinytra.";
+                    fernando.PhotoURL = "/images/fernando.jpg";
+                    fernando.Instrument = "Drums";
+                    fernando.ImageURL = "/images/whitemask.png";
+                }
+
+                // Alhassan
+                var alhassan = members.FirstOrDefault(m => m.Name == "Alhassan Shnoot");
+                if (alhassan == null)
+                {
+                    context.Members.Add(new Member
+                    {
+                        Name = "Alhassan Shnoot",
+                        Role = "Bass & Backing Vocals",
+                        Description = "Bassist providing low-end weight and backing vocals.",
+                        PhotoURL = "/images/alhassan.jpg",
+                        Instrument = "Bass",
+                        ImageURL = "/images/orangemask.png"
+                    });
+                }
+                else
+                {
+                    alhassan.Role = "Bass & Backing Vocals";
+                    alhassan.Description = "Bassist providing low-end weight and backing vocals.";
+                    alhassan.PhotoURL = "/images/alhassan.jpg";
+                    alhassan.Instrument = "Bass";
+                    alhassan.ImageURL = "/images/orangemask.png";
+                }
+
+                context.SaveChanges();
+
+
+
+                // Configure the HTTP request pipeline.
+                if (!app.Environment.IsDevelopment())
+                {
+                    app.UseExceptionHandler("/Home/Error");
+                    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                    app.UseHsts();
+                }
+
+                app.UseHttpsRedirection();
+                app.UseStaticFiles();
+
+                app.UseRouting();
+
+                app.UseAuthorization();
+
+                app.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                app.Run();
             }
-
-
-            // Configure the HTTP request pipeline.
-            if (!app.Environment.IsDevelopment())
-            {
-                app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
-
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
-
-            app.UseRouting();
-
-            app.UseAuthorization();
-
-            app.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
-
-            app.Run();
         }
     }
 }

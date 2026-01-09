@@ -18,8 +18,8 @@
                 @foreach (var item in Model)
                 {
                     <div class="col-12 col-sm-6 col-md-3 d-flex align-items-stretch">
-                        <div class="w-100 p-3 d-flex flex-row align-items-start "
-                             style="background-image: url('@item.ImageURL');">
+                        <div class="card profile-card member-bg w-100 p-3 d-flex flex-row align-items-start"
+                             @* style="background-image: url('@item.ImageURL'); " *@ >
 
                             <img class="avatar" src="@item.PhotoURL" alt="@item.Name" />
 
@@ -28,10 +28,15 @@
 
                                 <p style="font-weight: bold; padding-top: 10px;">@item.Role</p>
 
-                                <div class="card profile-card mt-3">
-                                    <p style="font-weight: bold; text-shadow: 0 0 10px rgba(160, 0, 255, 0.6), 0 0 20px rgba(160, 0, 255, 0.4);">
-                                        @item.Description
-                                    </p>
+                                <p style="font-weight: bold;
+                                /*   text-shadow: 0 0 10px rgba(160, 0, 255, 0.6),
+                                               0 0 20px rgba(160, 0, 255, 0.4); */">
+                                    @item.Description
+                                </p>
+
+
+                                <div class="card profilebutton mt-3">
+                               
 
                                     <a asp-controller="Members"
                                        asp-action="Details"
@@ -44,6 +49,7 @@
 
                         </div>
                     </div>
+
                 }
             </div>
 
