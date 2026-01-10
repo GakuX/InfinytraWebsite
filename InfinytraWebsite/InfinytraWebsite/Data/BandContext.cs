@@ -17,6 +17,14 @@ namespace InfinytraWebsite.Data
         public DbSet<Album> Albums { get; set; }
         public DbSet<Song> Songs { get; set; }
 
-       
+        public DbSet<Merch> Merches { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Merch>()
+                .Property(m => m.NewItem)
+                .HasDefaultValue(false);
+        }
+
     }
 }

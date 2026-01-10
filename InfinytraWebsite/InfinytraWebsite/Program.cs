@@ -26,7 +26,11 @@ namespace InfinytraWebsite
             {
                 var context = scope.ServiceProvider.GetRequiredService<BandContext>();
 
-                // ✅ Only seed if no songs exist yet
+             
+
+
+
+
                 if (!context.Songs.Any())
                 {
                     var album = context.Albums.FirstOrDefault();
@@ -45,49 +49,34 @@ namespace InfinytraWebsite
             {
                 var context = scope.ServiceProvider.GetRequiredService<BandContext>();
 
-                // Ensure DB exists / migrations applied (optional)
-                // context.Database.Migrate();
+                if (!context.Merches.Any())
+                {
+                    context.Merches.AddRange(
+                        new Merch
+                        {
+                            ItemName = "Infinytra Logo Tee",
+                           ItemDescription  = "Black tee with the Infinytra logo on the chest.",
+                            Price = 29.99m,
+                            ImageURL = "/images/merch/tee1.png",
+                            Categories = "Shirt",
+                            InStock = true
+                        },
+                        new Merch
+                        {
+                            ItemName = "Infinytra Logo Tee",
+                            ItemDescription = "Black tee with the Infinytra logo on the chest.",
+                            Price = 29.99m,
+                            ImageURL = "/images/merch/tee1.png",
+                            Categories = "Shirt",
+                            InStock = true
+                        }
+                    );
 
-                //    if (!context.Members.Any())
-                //    {
-                //        context.Members.AddRange(
-                //            new Member
-                //            {
-                //                Name = "Gary Tjokro",
-                //                Role = "Lead Guitar",
-                //                Description = "Lead guitarist of Infinytra, focused on melodic solos and heavy riffs.",
-                //                PhotoURL = "/images/garylogoimage.jpg"
-                //                , Instrument = "Jackson King V",
-                //                ImageURL = "/images/redmask.png"
-                //            },
-                //            new Member
-                //            {
-                //                Name = "Adan Riasat",
-                //                Role = "Rhythm Guitar & Vocals",
-                //                Description = "Rhythm guitarist and vocalist driving the core sound of the band.",
-                //              PhotoURL = "/images/adan.jpg", Instrument ="Epiphone SG",
-                //                ImageURL = "/images/purplemask.png"
-                //            },
-                //            new Member
-                //            {
-                //                Name = "Fernando Trujillo",
-                //                Role = "Drums & Percussion",
-                //                Description = "Drummer and percussionist bringing power and precision to Infinytra.",
-                //                PhotoURL = "/images/fernando.jpg", Instrument="Drums", ImageURL= "/images/whitemask.png"
-                //            },
-                //            new Member
-                //            {
-                //                Name = "Alhassan Shnoot",
-                //                Role = "Bass & Backing Vocals",
-                //                Description = "Bassist providing low-end weight and backing vocals.",
-                //                PhotoURL = "/images/alhassan.jpg", Instrument="Bass",
-                //                ImageURL = "/images/orangemask.png"
-                //            }
-                //        );
+                    
+                }
 
-                //        context.SaveChanges();
-                //    }
-                //}
+
+               
 
                 var members = context.Members.ToList();
 
