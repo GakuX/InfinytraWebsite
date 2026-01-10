@@ -102,7 +102,7 @@ namespace InfinytraWebsite
                         Description = "Lead guitarist of Infinytra, focused on melodic solos and heavy riffs.",
                         PhotoURL = "/images/garylogoimage.jpg",
                         Instrument = "Jackson King V",
-                        ImageURL = "/images/redmask.png"
+                        ImageURL = "/images/redkingvjackson.png"
                     });
                 }
                 else
@@ -111,7 +111,7 @@ namespace InfinytraWebsite
                     gary.Description = "Lead guitarist of Infinytra, focused on melodic solos and heavy riffs.";
                     gary.PhotoURL = "/images/garylogoimage.jpg";
                     gary.Instrument = "Jackson King V";
-                    gary.ImageURL = "/images/redmask.png";
+                    gary.ImageURL = "/images/redkingvjackson.png";
                 }
 
                 // Adan
@@ -125,7 +125,7 @@ namespace InfinytraWebsite
                         Description = "Rhythm guitarist and vocalist driving the core sound of the band.",
                         PhotoURL = "/images/adan.jpg",
                         Instrument = "Epiphone SG",
-                        ImageURL = "/images/purplemask.png"
+                        ImageURL = "/images/redsg.jpg"
                     });
                 }
                 else
@@ -134,7 +134,7 @@ namespace InfinytraWebsite
                     adan.Description = "Rhythm guitarist and vocalist driving the core sound of the band.";
                     adan.PhotoURL = "/images/adan.jpg";
                     adan.Instrument = "Epiphone SG";
-                    adan.ImageURL = "/images/purplemask.png";
+                    adan.ImageURL = "/images/redsg.jpg";
                 }
 
                 // Fernando
@@ -148,7 +148,7 @@ namespace InfinytraWebsite
                         Description = "Drummer and percussionist bringing power and precision to Infinytra.",
                         PhotoURL = "/images/fernando.jpg",
                         Instrument = "Drums",
-                        ImageURL = "/images/whitemask.png"
+                        ImageURL = "/images/whitedrums.jpg"
                     });
                 }
                 else
@@ -157,7 +157,7 @@ namespace InfinytraWebsite
                     fernando.Description = "Drummer and percussionist bringing power and precision to Infinytra.";
                     fernando.PhotoURL = "/images/fernando.jpg";
                     fernando.Instrument = "Drums";
-                    fernando.ImageURL = "/images/whitemask.png";
+                    fernando.ImageURL = "/images/whitedrums.jpg";
                 }
 
                 // Alhassan
@@ -171,7 +171,7 @@ namespace InfinytraWebsite
                         Description = "Bassist providing low-end weight and backing vocals.",
                         PhotoURL = "/images/alhassan.jpg",
                         Instrument = "Bass",
-                        ImageURL = "/images/orangemask.png"
+                        ImageURL = "/images/bassal.png"
                     });
                 }
                 else
@@ -180,7 +180,29 @@ namespace InfinytraWebsite
                     alhassan.Description = "Bassist providing low-end weight and backing vocals.";
                     alhassan.PhotoURL = "/images/alhassan.jpg";
                     alhassan.Instrument = "Bass";
-                    alhassan.ImageURL = "/images/orangemask.png";
+                    alhassan.ImageURL = "/images/bassal.png";
+                }
+
+                var orangehado = members.FirstOrDefault(m => m.Name == "Orange Hado");
+                if (orangehado == null)
+                {
+                    context.Members.Add(new Member
+                    {
+                        Name = "Orange Hado",
+                        Role = "Femboy slayer",
+                        Description = "I love bocchi the rock and i am the biggest fan of ravels guitar",
+                        PhotoURL = "/images/orangehado.jpg",
+                        Instrument = "Guitar",
+                        ImageURL = "/images/blackstrat.jpg"
+                    });
+                }
+                else
+                {
+                    orangehado.Role = "Femboy slayer";
+                    orangehado.Description = "I love bocchi the rock i am the biggest fan of ravels guitar";
+                    orangehado.PhotoURL = "/images/orangehado.jpg";
+                 orangehado.Instrument = "Guitar";
+                orangehado.ImageURL = "/images/blackstrat.jpg";
                 }
 
                 context.SaveChanges();

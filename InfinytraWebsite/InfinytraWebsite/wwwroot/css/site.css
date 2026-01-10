@@ -220,6 +220,15 @@ footer.footer .container {
     color: white;
 }*/
 
+
+
+.band-title {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    text-shadow: 0 0 12px rgba(160, 0, 255, 0.55), 0 0 28px rgba(160, 0, 255, 0.35);
+}
+
 .profile-card {
     border-radius: 0.85rem;
     border: 1px solid rgba(180, 0, 255, 0.25);
@@ -276,6 +285,26 @@ footer.footer .container {
     font-size: 1.2rem;
 }
 
+.btn-back-neon {
+    display: inline-block;
+    padding: 8px 18px;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #fff;
+    text-decoration: none;
+    background: linear-gradient(135deg, #7b2cff, #b14cff);
+    box-shadow: 0 0 10px rgba(160, 0, 255, 0.5), 0 0 25px rgba(160, 0, 255, 0.35);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+    .btn-back-neon:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 0 14px rgba(160, 0, 255, 0.7), 0 0 35px rgba(160, 0, 255, 0.5);
+        color: #fff;
+    }
+
+
 
 /* New: rounded container utility for home and other pages */
 .rounded-container {
@@ -294,6 +323,38 @@ footer.footer .container {
     padding: 18px;
   }
 }
+
+
+@keyframes glowCharge {
+    0% {
+        opacity: 0;
+        text-shadow: 0 0 0 rgba(160, 0, 255, 0);
+    }
+
+    100% {
+        opacity: 1;
+        text-shadow: 0 0 12px rgba(160, 0, 255, 0.55), 0 0 28px rgba(160, 0, 255, 0.35), 0 0 48px rgba(160, 0, 255, 0.2);
+    }
+}
+
+.band-title {
+    animation: glowCharge 1.6s ease-out forwards;
+}
+
+.glow-charge {
+    animation: glowCharge 3s ease-out forwards;
+}
+
+.detailsbackcard {
+    background-image: url("/images/purplebac.png");
+    background-size: cover;
+    background-position: center; /* ? keeps it centered */
+    background-repeat: no-repeat; /* ? prevents tiling */
+    border-radius: 1rem;
+}
+
+
+
 
 .buttonfonts {
     font-family: 'Montserrat', sans-serif;

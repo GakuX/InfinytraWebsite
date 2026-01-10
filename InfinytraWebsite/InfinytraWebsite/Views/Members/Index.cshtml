@@ -5,25 +5,29 @@
     ViewData["BodyClass"] = "members-body-bg";
 }
 
+@{
+    var i = 0; 
+}
+
 
 <body class="members-body-bg">
 
     <div class="">
         <div class="container py-5">
-            <h1 class="text-center text-white mb-4">Band Members</h1>
+            <h1 class="text-center text-white mb-4 band-title glowCharge">Band Members</h1>
 
 
 
-            <div class="row g-3">
+            <div class="row g-4 " style="padding-top: 15px">
                 @foreach (var item in Model)
                 {
-                    <div class="col-12 col-sm-6 col-md-3 d-flex align-items-stretch">
-                        <div class="card profile-card member-bg w-100 p-3 d-flex flex-row align-items-start"
-                             @* style="background-image: url('@item.ImageURL'); " *@ >
+                    <div class="col-12 col-sm-6 col-md-3 d-flex align-items-stretch ">
+                        <div class="card profile-card member-bg glow-charge w-100 p-3 d-flex flex-row align-items-start "
+                             style="background-image: url('/images/purplebac.png');  animation-delay: @(i * 0.15)s; ">
 
-                            <img class="avatar" src="@item.PhotoURL" alt="@item.Name" />
+                            <img class="avatar " src="@item.PhotoURL" alt="@item.Name" />
 
-                            <div class="profile-body ms-3">
+                            <div class="profile-body ms-3" style="color:white;">
                                 <h5 class="profile-name mb-1">@item.Name</h5>
 
                                 <p style="font-weight: bold; padding-top: 10px;">@item.Role</p>
@@ -35,13 +39,13 @@
                                 </p>
 
 
-                                <div class="card profilebutton mt-3">
+                                <div class="card profilebutton mt-3" style="background-color: black; color: white">
                                
 
                                     <a asp-controller="Members"
                                        asp-action="Details"
                                        asp-route-id="@item.Id"
-                                       class="btn btn-sm btn-light">
+                                       class="btn btn-sm btn-light" style="background-color: darkviolet; color: white">
                                         Details
                                     </a>
                                 </div>
