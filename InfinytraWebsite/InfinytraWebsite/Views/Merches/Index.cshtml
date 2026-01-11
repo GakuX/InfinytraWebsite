@@ -4,12 +4,12 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
 
-<p>
+
+@* <p>
     <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+</p> *@
+@* <table class="table">
     <thead>
         <tr>
             <th>
@@ -68,4 +68,126 @@
         </tr>
 }
     </tbody>
-</table>
+</table> *@
+
+
+@* <div class="container py-4">
+    <h1 class="text-white mb-4">Merch</h1>
+
+    <div class="row g-4">
+        @foreach (var item in Model)
+        {
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="card h-100">
+                    <img src="@item.ImageURL" class="card-img-top" style="height:180px; object-fit:cover;" />
+                    <div class="card-body">
+                        <h5 class="card-title">@item.ItemName</h5>
+                        <p class="mb-1 fw-bold">$@item.Price</p>
+                        <p class="small text-muted">@item.Categories</p>
+
+                        @if (!item.InStock)
+                        {
+                            <span class="badge bg-danger">Sold Out</span>
+                        }
+                    </div>
+                    <div class="card-footer bg-transparent border-0 pb-3">
+                        <a class="btn btn-sm btn-dark"
+                           asp-action="Details"
+                           asp-route-id="@item.Id">View</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div> *@
+
+
+
+<div class="container">
+    <h1 style="color: white">Merch</h1>
+
+    <div class="row">
+        @foreach(var item in Model)
+        {
+
+          
+
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+
+
+                <div class="card h-100 w-100 d-flex flex-column">
+
+                    <div class="">
+                        <img src="@item.ImageURL" class="card-img-top" style="height:180px; object-fit:cover;" />
+                    </div>
+
+
+
+                    <div class=" card-body card">
+
+                        <div>
+                            @if (item.NewItem)
+                            {
+                                <h1 style="color:red; font-weight:bold; font-size:30px;">NEW</h1>
+                            }
+                            else
+                            {
+                                <h1 style="color:red; font-size: 30px; font-weight:bold">ALMOST GONE</h1>
+                            }
+
+
+                            @if (!item.InStock)
+                            {
+                                <span class="badge bg-danger">Sold Out</span>
+                            }
+                            else
+                            {
+                                <span>.</span>
+                            }
+
+
+                        </div>
+
+
+
+
+                        <div style="padding-top: 5px">
+
+                            <h5 class="card-title">@item.ItemName</h5>
+                            <p class="mb-1 fw-bold">$@item.Price</p>
+                            <p class="small text-muted">@item.Categories</p>
+                        </div>
+
+                        <div class=" bg-transparent border-0 ">
+                            <a class="btn btn-sm btn-dark"
+                               asp-action="Details"
+                               asp-route-id="@item.Id">Item Details</a>
+                        </div>
+                    </div>
+
+
+                </div>
+                    
+
+@* 
+                <p style="color:white;">DEBUG NewItem = @item.NewItem</p>
+                <p style="color:white;">DEBUG InStock = @item.InStock</p> *@
+
+
+               
+               
+            </div>
+
+           
+
+
+        }
+      @*   <div class="col-5 container "style="background-color: red">
+
+           <input type="text" placeholder="Enter Keywords" />
+        </div> *@
+
+    </div>
+
+
+</div>

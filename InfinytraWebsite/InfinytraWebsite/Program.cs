@@ -49,34 +49,84 @@ namespace InfinytraWebsite
             {
                 var context = scope.ServiceProvider.GetRequiredService<BandContext>();
 
-                if (!context.Merches.Any())
-                {
-                    context.Merches.AddRange(
-                        new Merch
-                        {
-                            ItemName = "Infinytra Logo Tee",
-                           ItemDescription  = "Black tee with the Infinytra logo on the chest.",
-                            Price = 29.99m,
-                            ImageURL = "/images/merch/tee1.png",
-                            Categories = "Shirt",
-                            InStock = true
-                        },
-                        new Merch
-                        {
-                            ItemName = "Infinytra Logo Tee",
-                            ItemDescription = "Black tee with the Infinytra logo on the chest.",
-                            Price = 29.99m,
-                            ImageURL = "/images/merch/tee1.png",
-                            Categories = "Shirt",
-                            InStock = true
-                        }
-                    );
+                //if (!context.Merches.Any())
+                //{
+                //    context.Merches.AddRange(
+                //        new Merch
+                //        {
+                //            ItemName = "Infinytra Logo Tee",
+                //           ItemDescription  = "Black tee with the Infinytra logo on the chest.",
+                //            Price = 29.99m,
+                //            ImageURL = "/images/orangehado.jpg",
+                //            Categories = "Shirt",
+                //            InStock = false, NewItem = true
+                //        },
+                //        new Merch
+                //        {
+                //            ItemName = "Red Infinytra Logo Tee",
+                //            ItemDescription = "Red tee with the Infinytra logo on the chest.",
+                //            Price = 29.99m,
+                //            ImageURL = "/images/redmask.png",
+                //            Categories = "Shirt",
+                //            InStock = false, NewItem = true
+                //        }
+                //    );
 
-                    
+
+                //}
+
+                var merchList = context.Merches.ToList();
+
+                // Tee
+                var tee1 = merchList.FirstOrDefault(m => m.ItemName == "Infinytra Logo Tee");
+                if (tee1 == null)
+                {
+                    context.Merches.Add(new Merch
+                    {
+                        ItemName = "Infinytra Logo Tee",
+                        ItemDescription = "Black tee with the Infinytra logo on the chest.",
+                        Price = 29.99m,
+                        ImageURL = "/images/shirtboy.png",
+                        Categories = "Shirt",
+                        InStock = false,  
+                        NewItem = true    
+                    });
+                }
+                else
+                {
+                    tee1.ItemDescription = "Black tee with the Infinytra logo on the chest.";
+                    tee1.Price = 29.99m;
+                    tee1.ImageURL = "/images/shirtboy.png";
+                    tee1.Categories = "Shirt";
+                    tee1.InStock = false;  
+                    tee1.NewItem = true;   
+                }
+
+                var tee2 = merchList.FirstOrDefault(m => m.ItemName == "Infinytra girl tank top");
+                if (tee2 == null)
+                {
+                    context.Merches.Add(new Merch
+                    {
+                        ItemName = "Infinytra girl tank top",
+                        ItemDescription = "Black tee with the Infinytra logo on the chest.",
+                        Price = 24.99m,
+                        ImageURL = "/images/shirtgirl.png",
+                        Categories = "Shirt",
+                        InStock = false,
+                        NewItem = true
+                    });
+                }
+                else
+                {
+                    tee2.ItemDescription = "Black tee with the Infinytra logo on the chest.";
+                    tee2.Price = 24.99m;
+                    tee2.ImageURL = "/images/shirtgirl.png";
+                    tee2.Categories = "Shirt";
+                    tee2.InStock = false;
+                    tee2.NewItem = true;
                 }
 
 
-               
 
                 var members = context.Members.ToList();
 
