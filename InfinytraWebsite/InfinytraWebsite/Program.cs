@@ -102,12 +102,12 @@ namespace InfinytraWebsite
                     tee1.NewItem = true;   
                 }
 
-                var tee2 = merchList.FirstOrDefault(m => m.ItemName == "Infinytra girl tank top");
+                var tee2 = merchList.FirstOrDefault(m => m.ItemName == "Infinytra Girl Tank Top");
                 if (tee2 == null)
                 {
                     context.Merches.Add(new Merch
                     {
-                        ItemName = "Infinytra girl tank top",
+                        ItemName = "Infinytra Girl Tank Top",
                         ItemDescription = "Black tee with the Infinytra logo on the chest.",
                         Price = 24.99m,
                         ImageURL = "/images/shirtgirl.png",
@@ -124,6 +124,21 @@ namespace InfinytraWebsite
                     tee2.Categories = "Shirt";
                     tee2.InStock = false;
                     tee2.NewItem = true;
+                }
+
+                var tee3 = merchList.FirstOrDefault(m => m.ItemName == "First Album Vinyl Record");
+                if (tee3 == null)
+                {
+                    context.Merches.Add(new Merch
+                    {
+                        ItemName = "First Album Vinyl Record",
+                        ItemDescription = "Check out our debut album vinyl record!",
+                        Price = 54.99m,
+                        ImageURL = "/images/wanyk.png",
+                        Categories = "Album",
+                        InStock = false,
+                        NewItem = true
+                    });
                 }
 
 

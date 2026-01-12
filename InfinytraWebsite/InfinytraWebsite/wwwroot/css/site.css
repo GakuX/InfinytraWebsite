@@ -371,3 +371,8 @@ footer.footer .container {
 
     background
 }
+
+.border-bottom-text {
+    border-bottom: 1px solid black; /* Syntax: border-bottom: <thickness> <style> <color>; */
+    padding-bottom: 10px; /* Adds space between the text and the line */
+}

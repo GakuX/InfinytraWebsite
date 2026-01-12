@@ -6,72 +6,14 @@
 
 
 
-@* <p>
-    <a asp-action="Create">Create New</a>
-</p> *@
-@* <table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ItemName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ItemDescription)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NewItem)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ImageURL)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.InStock)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Categories)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ItemName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ItemDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NewItem)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ImageURL)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.InStock)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Categories)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table> *@
 
 
-@* <div class="container py-4">
+@* 
+<div class="container py-4">
+
+
+
+
     <h1 class="text-white mb-4">Merch</h1>
 
     <div class="row g-4">
@@ -99,95 +41,286 @@
             </div>
         }
     </div>
-</div> *@
+</div> *@ 
+
+<br />
+
+<div class="container-fluid">
 
 
+    <div class="row g-4 ">
 
-<div class="container">
-    <h1 style="color: white">Merch</h1>
+        <div class="col-12 col-lg-3 " style="background-color: white; border-radius:20px ">
 
-    <div class="row">
-        @foreach(var item in Model)
-        {
+            <br />
 
+         
+
+            <h2 class="border-bottom-text " style="font-weight:bold">Categories</h2>
+            <br />
+            <input class="form-control mb-3" placeholder="Search..." style="width:250px; " />
+            <div class="col">
+
+
+                <select class="" id="fruits" name="fruits" style="width: 254px; height:40px; border:none ">
+                    <option value="" disabled selected>Media</option>
+                    <option value="apple">Apple</option>
+              
+                    <option value="cherry">Cherry</option>
+                </select>
+
+                <br />
           
 
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <select class="row-2" id="fruits" name="fruits" style="width:254px;height:40px; border:none">
+                    <option value="" disabled selected>Apparel</option>
+                    <option value="apple">Apple</option>
+                 
+                    <option value="cherry">Cherry</option>
+                </select>
 
-
-                <div class="card h-100 w-100 d-flex flex-column">
-
-                    <div class="">
-                        <img src="@item.ImageURL" class="card-img-top" style="height:180px; object-fit:cover;" />
-                    </div>
-
-
-
-                    <div class=" card-body card">
-
-                        <div>
-                            @if (item.NewItem)
-                            {
-                                <h1 style="color:red; font-weight:bold; font-size:30px;">NEW</h1>
-                            }
-                            else
-                            {
-                                <h1 style="color:red; font-size: 30px; font-weight:bold">ALMOST GONE</h1>
-                            }
-
-
-                            @if (!item.InStock)
-                            {
-                                <span class="badge bg-danger">Sold Out</span>
-                            }
-                            else
-                            {
-                                <span>.</span>
-                            }
-
-
-                        </div>
-
-
-
-
-                        <div style="padding-top: 5px">
-
-                            <h5 class="card-title">@item.ItemName</h5>
-                            <p class="mb-1 fw-bold">$@item.Price</p>
-                            <p class="small text-muted">@item.Categories</p>
-                        </div>
-
-                        <div class=" bg-transparent border-0 ">
-                            <a class="btn btn-sm btn-dark"
-                               asp-action="Details"
-                               asp-route-id="@item.Id">Item Details</a>
-                        </div>
-                    </div>
-
-
-                </div>
-                    
-
-@* 
-                <p style="color:white;">DEBUG NewItem = @item.NewItem</p>
-                <p style="color:white;">DEBUG InStock = @item.InStock</p> *@
-
-
+                <br />
                
-               
+
+                <select class="row-2" id="fruits" name="fruits" style="width:254px;height:40px; border:none">
+                    <option value="" disabled selected>Accessories</option>
+                    <option value="apple">Apple</option>
+                 
+                    <option value="cherry">Cherry</option>
+                </select>
+
+
+                <br />
+                
+
+                <select class="row-2" id="fruits" name="fruits" style="width:254px;height:40px; border:none">
+                    <option value="" disabled selected>Collections</option>
+                    <option value="apple">Apple</option>
+                
+                    <option value="cherry">Cherry</option>
+                </select>
+
+                <br />
+
+
+                <select class="row-2" id="fruits" name="fruits" style="width:254px;height:40px; border:none">
+                    <option value="" disabled selected>ALbum special</option>
+                    <option value="apple">Apple</option>
+                   
+                    <option value="cherry">Cherry</option>
+                </select>
+
+
+      
             </div>
 
+            <br />
+
+            <h2 class="border-bottom-text " style="font-weight:bold">Filters</h2>
+
+
+            <br />
+
+            <select class="row-2" id="fruits" name="fruits" style="width:254px;height:40px; border:none">
+                <option value="" disabled selected style="font-weight:bold"> <strong>Price</strong></option>
+                <option value="apple">0.00-24.99$</option>
+              
+                <option value="cherry">24.99-50.99$</option>
+                  <option value="cherry">50.99-109.99$</option>
+                <option value="cherry">109.99-299.99$</option>
+            </select>
+
+            <select class="row-2" id="fruits" name="fruits" style="width:254px;height:40px; border:none">
+                <option value="" disabled selected style="font-weight:bold"> <strong>Gender</strong></option>
+                <option value="apple">Male</option>
+
+                <option value="cherry">Female</option>
+            </select>
+
+           <h1></h1>
+            <h1></h1>
+            <h1></h1>
            
 
 
-        }
-      @*   <div class="col-5 container "style="background-color: red">
 
-           <input type="text" placeholder="Enter Keywords" />
-        </div> *@
+        </div>
 
+
+
+
+        <div class="col-12 col-lg-9 ">
+
+
+            <div class="container py-4">
+
+
+                <h1 style="color: white">Merch</h1>
+
+                <div class="row g-4">
+                    @foreach (var item in Model)
+                    {
+
+
+
+                        <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+
+
+                            <div class="card h-100 w-100 d-flex flex-column">
+
+                                <div class="">
+                                    <img src="@item.ImageURL" class="card-img-top" style="height:180px; object-fit:cover;" />
+                                </div>
+
+
+
+                                <div class=" card-body ">
+
+                                    <div>
+                                        @if (item.NewItem)
+                                        {
+                                            <h1 style="color:red; font-weight:bold; font-size:30px;">NEW</h1>
+                                        }
+                                        else
+                                        {
+                                            <h1 style="color:red; font-size: 30px; font-weight:bold">ALMOST GONE</h1>
+                                        }
+
+
+                                        @if (!item.InStock)
+                                        {
+                                            <span class="badge bg-danger">Sold Out</span>
+                                        }
+                                        else
+                                        {
+                                            <span>.</span>
+                                        }
+
+
+                                    </div>
+
+
+
+
+                                    <div style="padding-top: 5px">
+
+                                        <h5 class="card-title">@item.ItemName</h5>
+                                        <p class="mb-1 fw-bold">$@item.Price</p>
+                                        <p class="small text-muted">@item.Categories</p>
+                                    </div>
+
+                                    <div class=" bg-transparent border-0 ">
+                                        <a class="btn btn-sm btn-dark"
+                                           asp-action="Details"
+                                           asp-route-id="@item.Id">Item Details</a>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                    }
+
+                </div>
+
+            </div>
+
+          
+
+
+
+
+
+
+        </div>
+    </div>
     </div>
 
 
+@*  <div class="container-fluid">
+    <div class="row g-4">
+
+        <!-- LEFT: ITEMS -->
+        <div class="col-12 col-lg-9">
+            <h1 class="text-white mb-3">Merch</h1>
+
+            <div class="row g-4">
+                @foreach (var item in Model)
+                {
+                    <div class="col-12 col-sm-6 col-xl-4">
+                        <div class="card h-100 d-flex flex-column">
+
+                            <img src="@item.ImageURL" class="card-img-top"
+                                 style="height:180px; object-fit:cover;" />
+
+                            <div class="card-body d-flex flex-column">
+
+                                <div style="min-height:60px;">
+                                    @if (item.NewItem)
+                                    {
+                                        <h2 class="m-0" style="color:red; font-weight:bold;">NEW</h2>
+                                    }
+                                    else
+                                    {
+                                        <h2 class="m-0" style="color:red; font-weight:bold;">ALMOST GONE</h2>
+                                    }
+
+                                    @if (!item.InStock)
+                                    {
+                                        <span class="badge bg-danger">Sold Out</span>
+                                    }
+                                </div>
+
+                                <h5 class="card-title mt-2">@item.ItemName</h5>
+                                <p class="mb-1 fw-bold">$@item.Price</p>
+                                <p class="small text-muted">@item.Categories</p>
+
+                                <div class="mt-auto">
+                                    <a class="btn btn-sm btn-dark w-100"
+                                       asp-action="Details"
+                                       asp-route-id="@item.Id">Item Details</a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <!-- RIGHT: FILTER BAR -->
+        <div class="col-12 col-lg-3">
+            <div class="card p-3">
+                <h5 class="mb-3">Filter</h5>
+
+                <input class="form-control mb-3" placeholder="Search..." />
+
+                <label class="form-label">Category</label>
+                <select class="form-select mb-3">
+                    <option>All</option>
+                    <option>Shirt</option>
+                    <option>Hoodie</option>
+                    <option>Accessories</option>
+                </select>
+
+                <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" id="inStockOnly">
+                    <label class="form-check-label" for="inStockOnly">In stock only</label>
+                </div>
+
+                <button class="btn btn-primary w-100 mt-2">Apply</button>
+            </div>
+        </div>
+
+    </div>
 </div>
+ *@
+
+   
+
+
+
+
+
+
