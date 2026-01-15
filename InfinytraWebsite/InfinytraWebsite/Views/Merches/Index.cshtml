@@ -8,40 +8,7 @@
 
 
 
-@* 
-<div class="container py-4">
 
-
-
-
-    <h1 class="text-white mb-4">Merch</h1>
-
-    <div class="row g-4">
-        @foreach (var item in Model)
-        {
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                <div class="card h-100">
-                    <img src="@item.ImageURL" class="card-img-top" style="height:180px; object-fit:cover;" />
-                    <div class="card-body">
-                        <h5 class="card-title">@item.ItemName</h5>
-                        <p class="mb-1 fw-bold">$@item.Price</p>
-                        <p class="small text-muted">@item.Categories</p>
-
-                        @if (!item.InStock)
-                        {
-                            <span class="badge bg-danger">Sold Out</span>
-                        }
-                    </div>
-                    <div class="card-footer bg-transparent border-0 pb-3">
-                        <a class="btn btn-sm btn-dark"
-                           asp-action="Details"
-                           asp-route-id="@item.Id">View</a>
-                    </div>
-                </div>
-            </div>
-        }
-    </div>
-</div> *@ 
 
 <br />
 
@@ -51,100 +18,115 @@
     <div class="row g-4 ">
 
         <div class="col-12 col-lg-3 " style="background-color: white; border-radius:20px ">
-
+             
             <br />
 
-         
-
-            <h2 class="border-bottom-text " style="font-weight:bold">Categories</h2>
-            <br />
-            <input class="form-control mb-3" placeholder="Search..." style="width:250px; " />
-            <div class="col">
+        
+            <form  asp-action="Index" method="get">
 
 
-                <select class="" id="fruits" name="fruits" style="width: 254px; height:40px; border:none ">
-                    <option value="" disabled selected>Media</option>
-                    <option value="apple">Apple</option>
-              
-                    <option value="cherry">Cherry</option>
-                </select>
+                <h2 class="border-bottom-text " style="font-weight:bold">Categories</h2>
+                <br />
+
+                <input name="q" class="form-control mb-3" placeholder="Search..." style="width:250px;  " value="@ViewBag.Q" />
+                <div class="col">
+
+
+                    <select name="category" class="form-select mb-2" style="width:254px;height:40px;">
+                        <option value="">All Categories</option>
+                        <option value="Shirt">Shirt</option>
+                        <option value="Album">Album</option>
+                        <option value="Accessories">Accessories</option>
+                        <option value="Collections">Collections</option>
+                        <option value="Album Special">Album special</option>
+                    </select>
+
+                    @* <select class="" id="fruits" name="category" style="width: 254px; height:40px; border:none ">
+                        <option value="Media" disabled selected>Media</option>
+
+                    </select>
+
+                    <br />
+
+
+                    <select class="row-2" id="fruits" name="category" style="width:254px;height:40px; border:none">
+                        <option value="Apparel" disabled selected>Apparel</option>
+
+                    </select>
+
+                    <br />
+
+
+                    <select class="row-2" id="fruits" name="category" style="width:254px;height:40px; border:none">
+                        <option value="Accessories" disabled selected>Accessories</option>
+
+                    </select>
+
+
+                    <br />
+
+
+                    <select class="row-2" id="fruits" name="category" style="width:254px;height:40px; border:none">
+                        <option value="Collections" disabled selected>Collections</option>
+
+                    </select>
+
+                    <br />
+
+
+                    <select class="row-2" id="fruits" name="category" style="width:254px;height:40px; border:none">
+                        <option value="Album Special" disabled selected>ALbum special</option>
+
+                    </select> *@
+
+
+
+                </div>
 
                 <br />
-          
 
-                <select class="row-2" id="fruits" name="fruits" style="width:254px;height:40px; border:none">
-                    <option value="" disabled selected>Apparel</option>
-                    <option value="apple">Apple</option>
-                 
-                    <option value="cherry">Cherry</option>
-                </select>
+                <h2 class="border-bottom-text " style="font-weight:bold">Filters</h2>
+
 
                 <br />
+
+                <select name="price" class="row-2" id="fruits"  style="width:254px;height:40px; border:none">
+                    <option value="Price" disabled selected style="font-weight:bold"> <strong>Price</strong></option>
                
+                    <option value="0-25">Under $25</option>
+                    <option value="25-50">$25 - $50</option>
+                    <option value="50-999">$50+</option>
 
-                <select class="row-2" id="fruits" name="fruits" style="width:254px;height:40px; border:none">
-                    <option value="" disabled selected>Accessories</option>
-                    <option value="apple">Apple</option>
-                 
-                    <option value="cherry">Cherry</option>
                 </select>
 
+                <select class="row-2" id="fruits" name="gender" style="width:254px;height:40px; border:none">
+                    <option value="" disabled selected style="font-weight:bold"> <strong>Gender</strong></option>
+                    <option value="Male">Male</option>
 
-                <br />
-                
-
-                <select class="row-2" id="fruits" name="fruits" style="width:254px;height:40px; border:none">
-                    <option value="" disabled selected>Collections</option>
-                    <option value="apple">Apple</option>
-                
-                    <option value="cherry">Cherry</option>
+                    <option value="Female">Female</option>
                 </select>
 
-                <br />
+                <h1></h1>
+                <h1></h1>
+                <h1></h1>
+
+                <div class="form-check mt-2">
+                    <input class="form-check-input" type="checkbox" name="inStockOnly" value="true" id="inStockOnly" />
+                    <label class="form-check-label" for="inStockOnly">In stock only</label>
+                </div>
+
+                <div class="d-flex gap-2 mt-3">
+                    <button type="submit" class="btn btn-dark btn-sm">Apply</button>
+                    <a asp-action="Index" class="btn btn-outline-secondary btn-sm">Reset</a>
+                </div>
 
 
-                <select class="row-2" id="fruits" name="fruits" style="width:254px;height:40px; border:none">
-                    <option value="" disabled selected>ALbum special</option>
-                    <option value="apple">Apple</option>
-                   
-                    <option value="cherry">Cherry</option>
-                </select>
-
-
-      
-            </div>
-
-            <br />
-
-            <h2 class="border-bottom-text " style="font-weight:bold">Filters</h2>
-
-
-            <br />
-
-            <select class="row-2" id="fruits" name="fruits" style="width:254px;height:40px; border:none">
-                <option value="" disabled selected style="font-weight:bold"> <strong>Price</strong></option>
-                <option value="apple">0.00-24.99$</option>
-              
-                <option value="cherry">24.99-50.99$</option>
-                  <option value="cherry">50.99-109.99$</option>
-                <option value="cherry">109.99-299.99$</option>
-            </select>
-
-            <select class="row-2" id="fruits" name="fruits" style="width:254px;height:40px; border:none">
-                <option value="" disabled selected style="font-weight:bold"> <strong>Gender</strong></option>
-                <option value="apple">Male</option>
-
-                <option value="cherry">Female</option>
-            </select>
-
-           <h1></h1>
-            <h1></h1>
-            <h1></h1>
-           
-
-
+            </form>
 
         </div>
+
+         
+           
 
 
 
@@ -237,87 +219,6 @@
     </div>
     </div>
 
-
-@*  <div class="container-fluid">
-    <div class="row g-4">
-
-        <!-- LEFT: ITEMS -->
-        <div class="col-12 col-lg-9">
-            <h1 class="text-white mb-3">Merch</h1>
-
-            <div class="row g-4">
-                @foreach (var item in Model)
-                {
-                    <div class="col-12 col-sm-6 col-xl-4">
-                        <div class="card h-100 d-flex flex-column">
-
-                            <img src="@item.ImageURL" class="card-img-top"
-                                 style="height:180px; object-fit:cover;" />
-
-                            <div class="card-body d-flex flex-column">
-
-                                <div style="min-height:60px;">
-                                    @if (item.NewItem)
-                                    {
-                                        <h2 class="m-0" style="color:red; font-weight:bold;">NEW</h2>
-                                    }
-                                    else
-                                    {
-                                        <h2 class="m-0" style="color:red; font-weight:bold;">ALMOST GONE</h2>
-                                    }
-
-                                    @if (!item.InStock)
-                                    {
-                                        <span class="badge bg-danger">Sold Out</span>
-                                    }
-                                </div>
-
-                                <h5 class="card-title mt-2">@item.ItemName</h5>
-                                <p class="mb-1 fw-bold">$@item.Price</p>
-                                <p class="small text-muted">@item.Categories</p>
-
-                                <div class="mt-auto">
-                                    <a class="btn btn-sm btn-dark w-100"
-                                       asp-action="Details"
-                                       asp-route-id="@item.Id">Item Details</a>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                }
-            </div>
-        </div>
-
-        <!-- RIGHT: FILTER BAR -->
-        <div class="col-12 col-lg-3">
-            <div class="card p-3">
-                <h5 class="mb-3">Filter</h5>
-
-                <input class="form-control mb-3" placeholder="Search..." />
-
-                <label class="form-label">Category</label>
-                <select class="form-select mb-3">
-                    <option>All</option>
-                    <option>Shirt</option>
-                    <option>Hoodie</option>
-                    <option>Accessories</option>
-                </select>
-
-                <div class="form-check mb-2">
-                    <input class="form-check-input" type="checkbox" id="inStockOnly">
-                    <label class="form-check-label" for="inStockOnly">In stock only</label>
-                </div>
-
-                <button class="btn btn-primary w-100 mt-2">Apply</button>
-            </div>
-        </div>
-
-    </div>
-</div>
- *@
-
-   
 
 
 

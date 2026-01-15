@@ -20,9 +20,65 @@ namespace InfinytraWebsite.Controllers
         }
 
         // GET: Merches
-        public async Task<IActionResult> Index()
+        public IActionResult Index(string q, string category, string gender, string price, bool inStockOnly)
         {
-            return View(await _context.Merches.ToListAsync());
+            var merches = _context.Merches.ToList(); 
+
+;
+            if (!string.IsNullOrWhiteSpace(q))
+            {
+                merches = merches.Where(n => n.ItemName.ToLower().Contains(q)).ToList(); 
+            }
+
+            if (!string.IsNullOrWhiteSpace(category))
+            {
+                merches = merches.Where(c => c.Categories == category).ToList(); 
+            }
+
+
+            if (!string.IsNullOrWhiteSpace(price))
+            {
+                if (price == "0-25")
+                    merches = merches.Where(m => m.Price < 25m).ToList();
+
+                else if (price == "25-50")
+                    merches = merches.Where(m => m.Price >= 25m && m.Price <= 50m).ToList();
+
+                else if (price == "50-999")
+                    merches = merches.Where(m => m.Price > 50m).ToList();
+            }
+
+            if (inStockOnly)
+            {
+                merches = merches
+                    .Where(m => m.InStock)
+                    .ToList();
+            }
+
+
+            if (!string.IsNullOrWhiteSpace(gender))
+            {
+
+                merches = merches.Where(g => g.Gender == gender).ToList(); 
+
+            }
+
+
+                return View(merches);
+        }
+
+
+        public async Task<IActionResult> Filffter(string q, string category, string gender, string price, bool inStockOnly)
+        {
+
+            if (!string.IsNullOrWhiteSpace(q))
+            {
+                var name = _context.Merches.Where(n => n.ItemName.Contains(q)); 
+            }
+
+
+
+            return View(); 
         }
 
         // GET: Merches/Details/5

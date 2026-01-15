@@ -18,6 +18,8 @@ namespace InfinytraWebsite.Models
 
         public string ImageURL { get; set; }
 
+        public string Gender { get; set;  }
+
         public bool InStock { get; set; }
 
         public string Categories { get; set; }

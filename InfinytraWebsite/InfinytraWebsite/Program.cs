@@ -89,7 +89,7 @@ namespace InfinytraWebsite
                         ImageURL = "/images/shirtboy.png",
                         Categories = "Shirt",
                         InStock = false,  
-                        NewItem = true    
+                        NewItem = true    , Gender = "Male"
                     });
                 }
                 else
@@ -113,7 +113,8 @@ namespace InfinytraWebsite
                         ImageURL = "/images/shirtgirl.png",
                         Categories = "Shirt",
                         InStock = false,
-                        NewItem = true
+                        NewItem = true,
+                        Gender = "Female"
                     });
                 }
                 else
