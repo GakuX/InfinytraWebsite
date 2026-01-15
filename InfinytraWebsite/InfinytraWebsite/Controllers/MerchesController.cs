@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using InfinytraWebsite.Data;
 using InfinytraWebsite.Models;
+using System.Security.Cryptography;
 
 namespace InfinytraWebsite.Controllers
 {
@@ -20,7 +21,7 @@ namespace InfinytraWebsite.Controllers
         }
 
         // GET: Merches
-        public IActionResult Index(string q, string category, string gender, string price, bool inStockOnly)
+        public IActionResult Index(string q, string category, string gender, string price, bool inStockOnly, bool onSaleOnly)
         {
             var merches = _context.Merches.ToList(); 
 
@@ -46,7 +47,15 @@ namespace InfinytraWebsite.Controllers
 
                 else if (price == "50-999")
                     merches = merches.Where(m => m.Price > 50m).ToList();
+                //else if (price == "0-10")
+                //    merches = merches.Where(p => p.Price < 10m).ToList(); 
             }
+
+            if (onSaleOnly)
+            {
+                merches = merches.Where(m => m.OnSale).ToList(); 
+            }
+          
 
             if (inStockOnly)
             {

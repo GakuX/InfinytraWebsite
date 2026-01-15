@@ -85,22 +85,35 @@ namespace InfinytraWebsite
                     {
                         ItemName = "Infinytra Logo Tee",
                         ItemDescription = "Black tee with the Infinytra logo on the chest.",
-                        Price = 29.99m,
+                        Price = 29.99m , SalePrice = 12.99m,
                         ImageURL = "/images/shirtboy.png",
                         Categories = "Shirt",
                         InStock = false,  
-                        NewItem = true    , Gender = "Male"
+                        NewItem = true    , Gender = "Male", OnSale = true
                     });
                 }
                 else
                 {
                     tee1.ItemDescription = "Black tee with the Infinytra logo on the chest.";
                     tee1.Price = 29.99m;
+                    tee1.SalePrice = 12.99m;
                     tee1.ImageURL = "/images/shirtboy.png";
                     tee1.Categories = "Shirt";
-                    tee1.InStock = false;  
-                    tee1.NewItem = true;   
+                    tee1.InStock = false;
+                    tee1.NewItem = true;
+                    tee1.Gender = "Male";
+                    tee1.OnSale = true;
                 }
+
+                //else
+                //{
+                //    tee1.ItemDescription = "Black tee with the Infinytra logo on the chest.";
+                //    tee1.Price = 29.99m;
+                //    tee1.ImageURL = "/images/shirtboy.png";
+                //    tee1.Categories = "Shirt";
+                //    tee1.InStock = false;  
+                //    tee1.NewItem = true;   
+                //}
 
                 var tee2 = merchList.FirstOrDefault(m => m.ItemName == "Infinytra Girl Tank Top");
                 if (tee2 == null)

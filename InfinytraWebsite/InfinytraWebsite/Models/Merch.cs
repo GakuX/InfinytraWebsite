@@ -24,6 +24,10 @@ namespace InfinytraWebsite.Models
 
         public string Categories { get; set; }
 
+        public bool OnSale { get; set; }
+
+        public decimal? SalePrice { get; set; }
+
 
 
 

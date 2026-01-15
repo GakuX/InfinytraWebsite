@@ -90,16 +90,17 @@
 
                 <br />
 
-                <select name="price" class="row-2" id="fruits"  style="width:254px;height:40px; border:none">
+                <select name="price" class="row-2 form-select" id="fruits" style="width:254px;height:40px; border:none">
                     <option value="Price" disabled selected style="font-weight:bold"> <strong>Price</strong></option>
                
                     <option value="0-25">Under $25</option>
+                @*     <option value="0-10">Under $10</option> *@
                     <option value="25-50">$25 - $50</option>
                     <option value="50-999">$50+</option>
 
                 </select>
 
-                <select class="row-2" id="fruits" name="gender" style="width:254px;height:40px; border:none">
+                <select class="row-2 form-select mb-2" id="fruits" name="gender" style="width:254px;height:40px; border:none">
                     <option value="" disabled selected style="font-weight:bold"> <strong>Gender</strong></option>
                     <option value="Male">Male</option>
 
@@ -110,15 +111,25 @@
                 <h1></h1>
                 <h1></h1>
 
+            
+
                 <div class="form-check mt-2">
                     <input class="form-check-input" type="checkbox" name="inStockOnly" value="true" id="inStockOnly" />
                     <label class="form-check-label" for="inStockOnly">In stock only</label>
                 </div>
 
-                <div class="d-flex gap-2 mt-3">
+                <div class="form-check mt-2">
+                    <input type="checkbox" class="form-check-input" name="onSaleOnly" value="true"  />
+                    <label class="form-check-label" for="onSaleOnly">On sale only</label>
+                </div>
+              
+                <div class="d-flex gap-2 mt-3"style="padding-top:10px">
                     <button type="submit" class="btn btn-dark btn-sm">Apply</button>
                     <a asp-action="Index" class="btn btn-outline-secondary btn-sm">Reset</a>
                 </div>
+
+                <br />
+                <br />
 
 
             </form>
@@ -140,12 +151,17 @@
                 <h1 style="color: white">Merch</h1>
 
                 <div class="row g-4">
-                    @foreach (var item in Model)
+
+                    
+                    @if (!Model.Any())
                     {
-
-
-
-                        <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+                        <h1> item not found</h1>
+                    }else
+                    {
+                         @foreach (var item in Model)
+                    {
+                       
+                             <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
 
 
                             <div class="card h-100 w-100 d-flex flex-column">
@@ -187,8 +203,41 @@
                                     <div style="padding-top: 5px">
 
                                         <h5 class="card-title">@item.ItemName</h5>
-                                        <p class="mb-1 fw-bold">$@item.Price</p>
-                                        <p class="small text-muted">@item.Categories</p>
+
+
+                                            @if (item.OnSale && item.SalePrice.HasValue)
+                                            {
+                                                <div class="d-flex">
+                                                @*     <div class="col-4">
+                                                        <p class="text-decoration-line-through mb-1 fw-bold"> </p>
+                                                    </div>
+                                                    
+                                                    <div class="col-4">
+                                                        <p style="color: red; font-weight:bold; font-size:17px "></p>
+                                                    </div>
+                                                    <div class="col-4"></div> *@
+
+
+                                                    <span class="text-decoration-line-through fw-bold text-muted">$@item.Price</span>
+
+                                                    <span class="fw-bold text-danger" style="font-size:17px; padding-left:10px">ONLY $@item.SalePrice.Value</span>
+                                                </div>
+                                                 
+
+                                                 
+
+                                            }else
+                                            {
+                                                <p class="mb-1 fw-bold">$@item.Price</p>
+                                            }
+
+                                      
+
+
+
+
+
+                                        <p class="small text-muted" style="padding-top:5px">@item.Categories</p>
                                     </div>
 
                                     <div class=" bg-transparent border-0 ">
@@ -201,8 +250,18 @@
 
                             </div>
 
-                        </div>
+                            </div>
+
+                        
+                        
+
+
+
                     }
+                    }
+
+
+                   
 
                 </div>
 
