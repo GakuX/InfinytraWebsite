@@ -20,8 +20,21 @@ namespace InfinytraWebsite
             builder.Services.AddDbContext<BandContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+     builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromHours(2);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+
             var app = builder.Build();
 
+
+            //session for adding item to cart
+            builder.Services.AddDistributedMemoryCache();
+       
+
+            //service use to add items in the dataabse using the bd context
             using (var scope = app.Services.CreateScope())
             {
                 var context = scope.ServiceProvider.GetRequiredService<BandContext>();
@@ -289,6 +302,8 @@ namespace InfinytraWebsite
                 app.UseStaticFiles();
 
                 app.UseRouting();
+                app.UseSession();
+
 
                 app.UseAuthorization();
 

@@ -142,7 +142,7 @@
 
 
 
-        <div class="col-12 col-lg-9 ">
+        <div class="col-12 col-lg-7 ">
 
 
             <div class="container py-4">
@@ -241,10 +241,31 @@
                                     </div>
 
                                     <div class=" bg-transparent border-0 ">
-                                        <a class="btn btn-sm btn-dark"
-                                           asp-action="Details"
-                                           asp-route-id="@item.Id">Item Details</a>
+
+                                            <span>
+                                                <a class="btn btn-sm btn-dark"
+                                                   asp-action="Details"
+                                                   asp-route-id="@item.Id">Item Details</a>
+                                            </span>
+
+                                            <span style="padding-left:10px">
+                                                <form asp-controller="Carts" asp-action="Add" method="post">
+                                                    <input type="hidden" name="id" value="@item.Id" />
+                                                    <button type="submit" class="btn btn-sm btn-dark">
+                                                        <i class="fa-solid fa-cart-shopping" style="padding-right:7px"></i>
+                                                        Add to cart
+                                                    </button>
+                                                </form>
+
+                                            </span>
+
                                     </div>
+
+                                
+
+                                        <div style="padding-top:5px">
+                                           
+                                        </div>
                                 </div>
 
 
@@ -274,6 +295,15 @@
 
 
 
+        </div>
+
+
+        <div class="col-12 col-lg-2 d-flex justify-content-end">
+            <div style="padding-left:200px; ">
+               @*  <button class="btn" style="width:60px; height:50px; color:white"><i class="fa-solid fa-cart-shopping" style="font-size:35px; padding-right:30px"></i></button> *@
+                <a asp-controller="Carts" asp-action="Index"><i class="fa-solid fa-cart-shopping" style="font-size:35px; padding-right:30px; color:white;"></i> </a>
+            </div>
+          
         </div>
     </div>
     </div>

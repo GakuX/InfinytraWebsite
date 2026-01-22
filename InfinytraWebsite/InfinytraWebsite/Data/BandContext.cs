@@ -19,12 +19,15 @@ namespace InfinytraWebsite.Data
 
         public DbSet<Merch> Merches { get; set; }
 
+        public DbSet<Cart> Carts { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Merch>()
                 .Property(m => m.NewItem)
                 .HasDefaultValue(false);
         }
+      
 
     }
 }
