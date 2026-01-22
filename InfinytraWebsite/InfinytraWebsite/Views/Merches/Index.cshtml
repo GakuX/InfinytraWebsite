@@ -191,7 +191,7 @@
                                         }
                                         else
                                         {
-                                            <span>.</span>
+                                            <span></span>
                                         }
 
 
@@ -242,23 +242,24 @@
 
                                     <div class=" bg-transparent border-0 ">
 
-                                            <span>
+                                        
                                                 <a class="btn btn-sm btn-dark"
                                                    asp-action="Details"
                                                    asp-route-id="@item.Id">Item Details</a>
-                                            </span>
+                                          
 
-                                            <span style="padding-left:10px">
-                                                <form asp-controller="Carts" asp-action="Add" method="post">
+                                            <br />
+
+                                          
+                                          @*       <form asp-controller="Carts" asp-action="Add" method="post">
                                                     <input type="hidden" name="id" value="@item.Id" />
                                                     <button type="submit" class="btn btn-sm btn-dark">
                                                         <i class="fa-solid fa-cart-shopping" style="padding-right:7px"></i>
                                                         Add to cart
                                                     </button>
-                                                </form>
+                                                </form> *@
 
-                                            </span>
-
+                                            
                                     </div>
 
                                 
@@ -307,6 +308,12 @@
         </div>
     </div>
     </div>
+
+    <script>
+
+
+
+    </script>
 
 
 

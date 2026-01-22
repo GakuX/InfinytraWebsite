@@ -1,11 +1,14 @@
 ﻿@model dynamic
 
+
 @{
     ViewData["Title"] = "Index";
 }
 
 <div class="container py-4 text-white">
-    <h1>Your Cart</h1>
+    <h1>Your Cart (@Model.Count) </h1>
+
+
     <a asp-controller="Merches" asp-action="Index"><span class="btn btn-danger text-white">Continue shopping?</span> </a>
 
     @if (Model == null || Model.Count == 0)
@@ -21,29 +24,56 @@
             {
                 <div class="card mb-3 p-3">
                     <div class="d-flex justify-content-between align-items-center">
-                        <div>
-                            <strong>@item.Merch.ItemName</strong><br />
+                        <div style="padding-top:10px">
+                            <strong style="padding-top:10px">@item.Merch.ItemName</strong><br />
                             Qty: @item.Qty
                         </div>
                         <div>
-                            $
+                            
                             @{
                                 decimal unit = item.Merch.Price;
 
-                                if (item.Merch.OnSale && item.Merch.SalePrice.HasValue)
+                                if (item.Merch.OnSale && item.Merch.SalePrice > 0)
                                 {
-                                    unit = item.Merch.SalePrice.Value;
+                                    unit = item.Merch.SalePrice;
                                 }
 
                                 decimal line = unit * item.Qty;
                             }
-                            @line
+                            <div style="font-weight:bold; font-size:20px">Total: $@line</div>
+                          
                         </div>
                     </div>
+                    <div style="padding-top:20px">
+
+                        <form asp-controller="Carts" asp-action="RemoveItem" method="post">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@item.Merch.Id" />
+                            <button type="submit" class="btn btn-danger">Remove</button>
+                        </form>
+                    </div>
+                    
                 </div>
             }
         </div>
 
-        <h3>Total: $@ViewBag.Total</h3>
+        <div class="container-fluid" style="background-color:white">
+
+
+
+            <h3 class="text-black" style="font-weight:bold">YOUR SUBTOTAL: $@ViewBag.Total</h3>
+
+            <div>
+                <span class="text-dark"> <a class="btn btn-light" style="border-color:black" asp-controller="Merches" asp-action="Index">Keep shopping</a></span>
+
+                <span style="padding-left:20px"><a class="btn btn-dark" style="border-color:white" asp-controller="Merches" asp-action="Index">CHECKOUT</a></span>
+
+               
+
+            </div>
+       
+
+        </div>
+     
     }
 </div>

@@ -61,15 +61,16 @@ namespace InfinytraWebsite.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(int id)
+        public IActionResult Add(int id , int qty)
         {
+            if (qty < 1) qty = 1; 
             var cart = GetCart();
 
             var existing = cart.FirstOrDefault(x => x.Id == id);
             if (existing == null)
-                cart.Add(new Cart { Id = id, Qty = 1 });
+                cart.Add(new Cart { Id = id, Qty = qty });
             else
-                existing.Qty = existing.Qty + 1;
+                existing.Qty = existing.Qty + qty;
 
             SaveCart(cart);
 
@@ -77,9 +78,18 @@ namespace InfinytraWebsite.Controllers
         }
 
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult RemoveItem(int id)
+        {
+            var cart = GetCart();
 
+            cart.RemoveAll(m => m.Id == id);
 
+            SaveCart(cart);
 
+            return RedirectToAction("Index"); 
+        }
 
 
         // GET: Carts/Details/5
@@ -100,78 +110,9 @@ namespace InfinytraWebsite.Controllers
             return View(cart);
         }
 
-        // GET: Carts/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Carts/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Qty")] Cart cart)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(cart);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(cart);
-        }
-
+    
         // GET: Carts/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var cart = await _context.Carts.FindAsync(id);
-            if (cart == null)
-            {
-                return NotFound();
-            }
-            return View(cart);
-        }
-
-        // POST: Carts/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Qty")] Cart cart)
-        {
-            if (id != cart.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(cart);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CartExists(cart.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(cart);
-        }
+        
 
         // GET: Carts/Delete/5
         public async Task<IActionResult> Delete(int? id)
