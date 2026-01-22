@@ -168,7 +168,7 @@ namespace InfinytraWebsite
                     });
                 }
 
-                var tee4 = merchList.FirstOrDefault(m => m.ItemName == "Infinytra Thunder Twink Hoodie ");
+                var tee4 = merchList.FirstOrDefault(m => m.ItemName == "Infinytra Thunder Twink Hoodie");
                 if (tee4 == null)
                 {
                     context.Merches.Add(new Merch
@@ -185,18 +185,18 @@ namespace InfinytraWebsite
                         OnSale = true
                     });
                 }
-                else
-                {
-                    tee4.ItemDescription = "Our sigma album including our mascot Amir al-houssine";
-                    tee4.Price = 149.99m;
-                    tee4.SalePrice = 129.99m;
-                    tee4.ImageURL = "/images/ttshirt.png";
-                    tee4.Categories = "Hoodie";
-                    tee4.InStock = true;
-                    tee4.NewItem = true;
-                    tee4.Gender = "Male";
-                    tee4.OnSale = true;
-                }
+                //else
+                //{
+                //    tee4.ItemDescription = "Our sigma album including our mascot Amir al-houssine";
+                //    tee4.Price = 149.99m;
+                //    tee4.SalePrice = 129.99m;
+                //    tee4.ImageURL = "/images/ttshirt.png";
+                //    tee4.Categories = "Hoodie";
+                //    tee4.InStock = true;
+                //    tee4.NewItem = true;
+                //    tee4.Gender = "Male";
+                //    tee4.OnSale = true;
+                //}
 
 
 
