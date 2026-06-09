@@ -17,6 +17,23 @@ namespace InfinytraWebsite
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+            builder.Services.AddEndpointsApiExplorer();  // Required for Swagger
+              // Adds Swagger generation
+              builder.Services.AddSwaggerGen();
+            builder.Services.AddControllers()
+    .AddNewtonsoftJson();
+
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll", policy =>
+                {
+                    policy.WithOrigins("http://localhost:3000")
+                          .AllowAnyHeader()
+                          .AllowAnyMethod()
+                          .AllowCredentials();
+                });
+            });
+
             builder.Services.AddDbContext<BandContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
@@ -29,6 +46,29 @@ namespace InfinytraWebsite
 
             var app = builder.Build();
 
+ //swashbuckle package remember this
+            if (app.Environment.IsDevelopment())
+            {
+                app.UseSwagger();  // Generates the Swagger JSON
+                app.UseSwaggerUI();  // Shows the Swagger webpage
+            }
+
+
+
+            if (!app.Environment.IsDevelopment())
+            {
+                app.UseExceptionHandler("/Home/Error");
+                app.UseHsts();
+            }
+
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+            app.UseRouting();
+
+            app.UseCors("AllowAll");  // For React later
+            app.UseAuthorization();
+
+           
 
             //session for adding item to cart
             builder.Services.AddDistributedMemoryCache();
@@ -332,6 +372,7 @@ namespace InfinytraWebsite
                 app.UseStaticFiles();
 
                 app.UseRouting();
+                app.UseCors("AllowAll");
                 app.UseSession();
 
 
@@ -340,7 +381,7 @@ namespace InfinytraWebsite
                 app.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
-
+                app.MapControllers();
                 app.Run();
             }
         }
