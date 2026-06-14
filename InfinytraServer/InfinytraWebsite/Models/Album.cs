@@ -10,6 +10,7 @@ namespace InfinytraWebsite.Models
         public string Title { get; set; }
 
         public string Description { get; set; }
+
         [DataType(DataType.Date)]
         public DateTime? CreatedDate { get; set; }   
 
@@ -18,6 +19,10 @@ namespace InfinytraWebsite.Models
         public string ImageURL { get; set; }
 
         [ValidateNever]
-        public List<Song> Songs { get; set; }   
+        public List<Song> Songs { get; set; }
+
+        public string SongFile { get; set; }
+
+        
     }
 }

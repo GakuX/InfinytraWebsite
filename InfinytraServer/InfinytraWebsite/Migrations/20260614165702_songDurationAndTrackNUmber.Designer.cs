@@ -4,6 +4,7 @@ using InfinytraWebsite.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InfinytraWebsite.Migrations
 {
     [DbContext(typeof(BandContext))]
-    partial class BandContextModelSnapshot : ModelSnapshot
+    [Migration("20260614165702_songDurationAndTrackNUmber")]
+    partial class songDurationAndTrackNUmber
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

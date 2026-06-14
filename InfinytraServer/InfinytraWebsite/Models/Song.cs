@@ -10,6 +10,12 @@
 
         public int AlbumId { get; set; }
 
+
         public Album Album { get; set; }
+
+
+        public string Duration { get; set;  }
+
+        public int TrackNumber { get; set; }
     }
 }

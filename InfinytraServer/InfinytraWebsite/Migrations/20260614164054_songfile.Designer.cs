@@ -4,6 +4,7 @@ using InfinytraWebsite.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InfinytraWebsite.Migrations
 {
     [DbContext(typeof(BandContext))]
-    partial class BandContextModelSnapshot : ModelSnapshot
+    [Migration("20260614164054_songfile")]
+    partial class songfile
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -167,10 +170,6 @@ namespace InfinytraWebsite.Migrations
                     b.Property<int>("AlbumId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Duration")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("FilePath")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -178,9 +177,6 @@ namespace InfinytraWebsite.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("TrackNumber")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

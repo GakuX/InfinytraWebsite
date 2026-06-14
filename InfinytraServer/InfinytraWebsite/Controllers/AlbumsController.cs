@@ -20,9 +20,21 @@ namespace InfinytraWebsite.Controllers
         }
 
         // GET: Albums
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string name)
         {
-            return View(await _context.Albums.ToListAsync());
+
+            var albums =  _context.Albums.AsQueryable();    
+
+            
+            if (!string.IsNullOrWhiteSpace(name))
+            {
+                albums =  albums.Where(n => n.Title.ToLower().Contains(name));
+            }
+
+            var filteredAlbum = await albums.ToListAsync(); 
+
+
+            return View(filteredAlbum);
         }
 
         // GET: Albums/Details/5
@@ -33,7 +45,8 @@ namespace InfinytraWebsite.Controllers
                 return NotFound();
             }
 
-            var album = await _context.Albums
+            //include songs because it has a song list model in album model (relation plusieurs i guess)
+            var album = await _context.Albums.Include(s => s.Songs)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (album == null)
             {

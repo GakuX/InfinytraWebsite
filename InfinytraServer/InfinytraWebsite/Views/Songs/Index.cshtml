@@ -4,12 +4,9 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+<br />
+<br />
+@* <table class="table">
     <thead>
         <tr>
             <th>
@@ -39,3 +36,328 @@
 }
     </tbody>
 </table>
+ *@
+
+@{
+    var album = Model.FirstOrDefault()?.Album;
+}
+ <div class="container-fluid album-container" >
+    <div class="album-banner">
+        <img src="@album.ImageURL" />
+
+        <div>
+            <p>Album</p>
+            <h1>@album.Title</h1>
+            <h5>Infinytra</h5>
+        </div>
+    </div>
+ </div>
+ <br />
+
+<div class="playlist-container">
+    <table class="playlist-table">
+        <thead>
+            <tr>
+                <th style="width: 60px">#</th>
+                <th>Title</th>
+                <th>Album</th>
+                <th style="width: 80px"><i class="fa-solid fa-clock"></i></th>
+                <th style="width: 400px">Actions</th>  
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int count = 1;
+            }
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="song-number">@count</td>
+                    <td class="song-title">@item.Name</td>
+                    <td class="song-album">@(item.Album?.Title ?? "Single")</td>
+                    <td class="song-duration">@item.Duration</td>
+                    <td>
+                        <div class="song-actions">
+                            <audio controls class="custom-audio">
+                                <source src="@item.FilePath" type="audio/mpeg">
+                            </audio>
+                        </div>
+                    </td>
+                </tr>
+                count++;
+            }
+        </tbody>
+    </table>
+</div>
+
+<br />
+
+
+
+<style>
+    .custom-audio {
+        width: 300px;
+        height: 50px;
+        border-radius: 10px;
+        background: #2a2a2a;
+    }
+
+        .custom-audio::-webkit-media-controls-panel {
+            background: #2a2a2a;
+        }
+
+        .custom-audio::-webkit-media-controls-play-button {
+            background-color: #ff0055;
+            border-radius: 50%;
+        }
+
+        .custom-audio::-webkit-media-controls-current-time-display,
+        .custom-audio::-webkit-media-controls-time-remaining-display {
+            color: white;
+        }
+
+        .custom-audio::-webkit-media-controls-timeline {
+            margin-left:15px;
+            margin-right: 5px;
+            background-color: #555;
+            border-radius: 10px;
+        }
+</style>
+
+<style>
+    .album-banner {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        margin-bottom: 40px;
+    }
+
+        .album-banner img {
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+
+        .album-banner h1 {
+            color: white;
+            font-size: 4rem;
+            font-weight: 800;
+        }
+
+    .playlist-container {
+        background: #242222;
+        border-radius: 20px;
+        padding: 25px;
+        color: white;
+    }
+
+    .album-container {
+        background: linear-gradient(145deg, #4f144e, #242222);
+        border-radius: 20px;
+        padding: 25px;
+        color: white;
+    }
+
+    /* Table version of playlist header */
+    .playlist-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        .playlist-table th {
+            text-align: left;
+            padding: 15px;
+            color: #888;
+            font-size: 0.9rem;
+            border-bottom: 1px solid #333;
+        }
+
+        .playlist-table td {
+            padding: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .playlist-table tr {
+            transition: 0.3s;
+            border-radius: 12px;
+        }
+
+            .playlist-table tr:hover {
+                background: rgba(199, 0, 57, 0.2);
+            }
+
+        /* Right align duration and actions */
+        .playlist-table th:nth-child(4),
+        .playlist-table td:nth-child(4) {
+            text-align: right;
+        }
+
+        .playlist-table th:nth-child(5),
+        .playlist-table td:nth-child(5) {
+            text-align: right;
+        }
+
+    .song-number {
+        color: #888;
+        font-weight: 500;
+    }
+
+    .song-title {
+        font-weight: 600;
+        color: white;
+    }
+
+    .song-album {
+        color: #b3b3b3;
+    }
+
+    .song-duration {
+        color: #b3b3b3;
+    }
+
+    .song-actions {
+        display: flex;
+        gap: 10px;
+        justify-content: flex-end;
+    }
+
+    .play-btn {
+        background: #827e7e;
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        text-decoration: none;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        transition: 0.3s;
+    }
+
+        .play-btn:hover {
+            background: #ff0055;
+            color: white;
+            transform: scale(1.05);
+        }
+
+    .edit-btn {
+        background: transparent;
+        border: 1px solid #666;
+        color: white;
+        text-decoration: none;
+        padding: 8px 16px;
+        border-radius: 20px;
+        transition: 0.3s;
+    }
+
+        .edit-btn:hover {
+            background: white;
+            color: black;
+        }
+</style>
+
+      @*           <style>
+
+    .album-banner {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        margin-bottom: 40px;
+    }
+
+        .album-banner img {
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 15px;
+            
+        }
+
+        .album-banner h1 {
+            color: white;
+            font-size: 4rem;
+            font-weight: 800;
+        }
+
+
+
+    .playlist-container {
+        background: #242222;
+        border-radius: 20px;
+        padding: 25px;
+        color: white;
+    }
+
+    .playlist-header {
+        display: grid;
+        grid-template-columns: 60px 2fr 1fr 180px;
+        padding: 15px;
+        color: #888;
+        font-size: 0.9rem;
+        border-bottom: 1px solid #333;
+        margin-bottom: 10px;
+    }
+
+    .song-row {
+        display: grid;
+        grid-template-columns: 60px 2fr 1fr 180px;
+        align-items: center;
+        padding: 15px;
+        border-radius: 12px;
+        transition: 0.3s;
+    }
+
+        .song-row:hover {
+            background: rgba(199, 0, 57, 0.2);
+        }
+
+    .song-number {
+        color: #888;
+    }
+
+    .song-title {
+        font-weight: 600;
+        color: white;
+    }
+
+    .song-album {
+        color: #b3b3b3;
+    }
+
+    .song-actions {
+        display: flex;
+        gap: 10px;
+    }
+
+    .play-btn {
+        background: #827e7e;
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        text-decoration: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+        .play-btn:hover {
+            background: #ff0055;
+            color: white;
+        }
+
+    .edit-btn {
+        background: transparent;
+        border: 1px solid #666;
+        color: white;
+        text-decoration: none;
+        padding: 8px 16px;
+        border-radius: 20px;
+    }
+
+        .edit-btn:hover {
+            background: white;
+            color: black;
+        }
+                </style> *@

@@ -10,31 +10,202 @@
     <h1 class="text-center text-dark mb-4">Albums</h1>
 
     <div class="d-flex justify-content-center mb-3">
-        <a asp-action="Create" class="btn bg-black" style="color: white">+ Add New Album</a>
+        @* <a asp-action="Create" class="btn bg-black" style="color: white">+ Add New Album</a> *@
     </div>
 
-    <div class="row">
-        @foreach (var album in Model)
-        {
-            <div class="col-md-4 mb-4">
-                <div class="card h-100 shadow-sm" style="background-color: #1b001b; color: white;">
-                    <img src="@album.ImageURL" class="card-img-top" alt="@album.Title" style="height: 250px; object-fit: cover;">
-                    <div class="card-body">
-                        <h5 class="card-title">@album.Title</h5>
-                        <p class="card-text">@album.Description</p>
-                        <p class="text-muted">Released: @album.CreatedDate</p>
-                    </div>
-                    <div class="card-footer text-center">
-                        <a asp-action="Details" asp-route-id="@album.Id" class="btn btn-sm btn-light">View</a>
-                        <a asp-action="Edit" asp-route-id="@album.Id" class="btn btn-sm btn-secondary">Edit</a>
-                        <a asp-action="Delete" asp-route-id="@album.Id" class="btn btn-sm btn-danger">Delete</a>
-                    </div>
+
+
+    <form asp-action="Index" method="get" class="mb-4">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-4" style="height: 50px;">
+                <div class="input-group">
+                    <input type="text"
+                           name="name"
+                           class="form-control"
+                           placeholder="Search by album name..."
+                           value="@ViewBag.CurrentFilter" style="height: 46px" />
+                    <button type="submit" class="btn btn-edit">
+                        <i class="fas fa-search"></i> Search
+                    </button>
+                    @if (!string.IsNullOrEmpty(ViewBag.CurrentFilter))
+                    {
+                        <a asp-action="Index" class="btn btn-outline-secondary">Clear</a>
+                    }
                 </div>
             </div>
+        </div>
+    </form>
+
+    <div class="row d-flex justify-content-center">
+
+        @if (!Model.Any())
+        {
+            <h1 class="text-danger d-flex justify-content-center">item not found</h1>
         }
+        else
+        {
+              @foreach (var album in Model)
+        {
+            <div class="col-lg-3 col-md-4">
+                <div class="album-card h-100 shadow-sm" style="background-color: #1b001b; color: white;">
+
+                    <div class="album-image-container">
+
+
+                        <img src="@album.ImageURL" class="card-img-top" alt="@album.Title" style="height: 500px;  object-fit: cover;">
+                        @* <div class="album-content">
+                            <h5 class="card-title">@album.Title</h5>
+                            <p class="card-text">@album.Description</p>
+                            <p class="text-muted">Released: @album.CreatedDate</p>
+                        </div> *@
+
+                        <div class="album-content">
+                            <h4 class="album-title">@album.Title</h4>
+
+                            <p class="album-description">
+                                @album.Description
+                            </p>
+
+                            <div class="album-buttons">
+                                <a asp-action="Index" asp-controller="Songs"                               asp-route-id="@album.Id"
+                                   class="btn btn-view">
+                                    View Songs
+                                </a>
+
+                              
+                            </div>
+                        </div>
+
+                        </div>
+                       @*  <div class="card-footer text-center">
+                            <a asp-action="Details" asp-route-id="@album.Id" class="btn btn-sm btn-light">View</a>
+                            <a asp-action="Edit" asp-route-id="@album.Id" class="btn btn-sm btn-secondary">Edit</a>
+                             <a asp-action="Delete" asp-route-id="@album.Id" class="btn btn-sm btn-danger">Delete</a>
+                            <a asp-action="Index" asp-controller="Songs" asp-route-id="@album.Id" class="btn btn-sm btn-light"></a>
+                        </div> *@
+
+                    </div>
+
+
+                   
+
+
+                </div>
+          
+        }
+   
+        }
+
+
     </div>
+
+
+
 
 
 </div>
+
+
+
+<style>
+
+    .album-card {
+        background: linear-gradient(145deg, #4f144e, #242222);
+        background-color: darkred;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+        transition: all 0.3s ease;
+        height: 100%;
+    }
+
+        .album-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(255,0,100,0.35);
+        }
+
+    .album-image-container {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .album-image {
+        
+        height: 320px;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+
+    .album-card:hover .album-image {
+        transform: scale(1.08);
+    }
+
+    .album-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(0,0,0,0.65);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transition: 0.3s;
+    }
+
+    .album-card:hover .album-overlay {
+        opacity: 1;
+    }
+
+  .album-content {
+    padding: 20px;
+    text-align: center;
+}
+
+.album-title {
+    color: white;
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.album-description {
+    color: #bdbdbd;
+    font-size: 0.95rem;
+    min-height: 50px;
+    margin-bottom: 20px;
+}
+
+.album-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn-view {
+    background: #c70039;
+    color: white;
+    border-radius: 30px;
+    padding: 8px 18px;
+    border: none;
+}
+
+.btn-view:hover {
+    background: #ff004f;
+    color: white;
+}
+
+.btn-edit {
+   
+         background-color: #330ddb;
+    color: white;
+    border: 1px solid #777;
+    border-radius: 30px;
+    padding: 8px 18px;
+}
+
+        .btn-edit:hover {
+            background: #2304b0;
+            color: white;
+}
+</style>
 
 

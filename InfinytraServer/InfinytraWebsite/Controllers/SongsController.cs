@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using InfinytraWebsite.Data;
+using InfinytraWebsite.Models;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using InfinytraWebsite.Data;
-using InfinytraWebsite.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace InfinytraWebsite.Controllers
 {
@@ -14,17 +15,61 @@ namespace InfinytraWebsite.Controllers
     {
         private readonly BandContext _context;
 
-        public SongsController(BandContext context)
+        private readonly IWebHostEnvironment _webHostEnvironment;
+
+        // Update constructor to include IWebHostEnvironment
+        public SongsController(BandContext context, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         // GET: Songs
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int id)
         {
-            var bandContext = _context.Songs.Include(s => s.Album);
-            return View(await bandContext.ToListAsync());
+
+
+
+
+           
+            var album = await _context.Albums.FindAsync(id);
+            if (album == null)
+            {
+                return NotFound();
+            }
+
+           
+            var songs = await _context.Songs
+                .Where(s => s.AlbumId == id)
+                .OrderBy(s => s.TrackNumber)
+                .ToListAsync();  //  ToListAsync() 
+
+           
+
+            return View(songs);  // Passing List<Song>
         }
+
+        //public async Task<IActionResult> Play(int id)
+        //{
+        //    var song = await _context.Songs.FindAsync(id);
+        //    if (song == null || string.IsNullOrEmpty(song.FilePath))
+        //    {
+        //        return NotFound("Song not found");
+        //    }
+
+        //    // Get the physical file path
+        //    var filePath = Path.Combine(_webHostEnvironment.WebRootPath, song.FilePath.TrimStart('/'));
+
+        //    if (!System.IO.File.Exists(filePath))
+        //    {
+        //        return NotFound($"Audio file not found at: {song.FilePath}");
+        //    }
+
+        //    // Return the audio file
+        //    var fileBytes = await System.IO.File.ReadAllBytesAsync(filePath);
+        //    return File(fileBytes, "audio/mpeg", Path.GetFileName(filePath));
+        //}
+    
 
         // GET: Songs/Details/5
         public async Task<IActionResult> Details(int? id)
