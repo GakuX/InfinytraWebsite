@@ -4,98 +4,112 @@
 
 <div class="container-fluid homeback1 rounded-container">
 
-
-    @* <div class="row">
-        <br />
-        <h1 style="text-align:center; padding-top: 20px; font-family: Bahnschrift">Welcome To Infinytra</h1>
-    </div>
- *@
- 
-
-    <div class="hero-content">
+    <!-- Hero Section - Full Width -->
+    <div class="hero-section text-center">
         <h1 class="band-title">INFINYTRA</h1>
         <p class="band-tagline">Welcome to the family</p>
+
+        <div class="hero-buttons button2fonts">
+            <a asp-controller="Albums" asp-action="Index" class="btn btn-outline-light">
+                Explore Albums
+            </a>
+            <a asp-controller="Home" asp-action="Contact" class="btn btn-outline-light">
+                Contact
+            </a>
+        </div>
+
+        <div class="about-preview">
+            <p style="font-weight:bold;">
+                Infinytra is a Metalcore band striving to create songs with different and unique sound
+            </p>
+        </div>
     </div>
 
+    <!-- Featured Album Section -->
+    <div class="featured-section text-center my-5">
+        <div class="featured-album">
+            <img src="/images/vermillion.png" alt="Album cover" style="max-width: 250px; border-radius: 15px;">
+            <h3 class="mt-3">Check Our Latest Release!</h3>
+            <p style="color:white">Debut Album • 2025</p>
 
-    <div class="hero-buttons button2fonts">
-        <a asp-controller="Albums" asp-action="Index" class="btn btn-outline-light">
-            Explore Albums
-        </a>
-        <a asp-controller="Home" asp-action="Contact" class="btn btn-outline-light">
-            Contact
-        </a>
-    </div>
-
-
-    <div class="about-preview">
-        <p style="font-weight:bold;">
-            Infinytra is a progressive-metal band thriving to create songs with different and unique sound
-        </p>
-    </div>
-
-
-
-    <div class="featured-album">
-        <img src="/images/f069407edab4219e34f36ea331d1eb2e.gif" alt="Album cover">
-        <h3>Check Our Latest Release!</h3>
-        <p style="color:white">Debut Album • 2025</p>
-
-
-       @*  <div class="row mt-4">
-            <div class="col-12 d-flex justify-content-center gap-4">
-                <a asp-controller="Albums"
-                   asp-action="Index"
-                   class="btn btn-sm btn-light">
-                    View Album
-                </a>
-
-                
- *@
-
-
-
-        <div class="row">
-
-            <div class="col-12 d-flex justify-content-center gap-3 flex-wrap button2fonts">
-                <button class="btn btn-outline-light js-open-modal"
-                        data-url="/Home/ListenModal">
+            <div class="d-flex justify-content-center gap-3 flex-wrap button2fonts">
+                <button class="btn btn-outline-light js-open-modal" data-url="/Home/ListenModal">
                     Listen Now
                 </button>
-
-                <button class="btn btn-outline-light js-open-modal"
-                        data-url="/Home/NewsletterModal">
+                <button class="btn btn-outline-light js-open-modal" data-url="/Home/NewsletterModal">
                     Join Newsletter
                 </button>
             </div>
-
-            </div>
-
-           
-
         </div>
-
-                
-            </div>
-        </div>
-
-
-
-        
-
-
-
     </div>
 
-   
+    <!-- Two Column Layout: Latest Single (Left) + Tour Dates (Right) -->
+    <div class="row mt-5">
 
-</div>
+        <!-- LEFT COLUMN - Latest Single -->
+        <div class="col-lg-6 mb-4">
+            <div class="single-card p-4" style="background: rgba(0,0,0,0.4); border-radius: 20px; height: 100%;">
+                <h2 class="text-center mb-4" style="color: white;">Latest Single</h2>
+
+                <div class="single-artwork text-center">
+                    <img src="/images/poison.webp" alt="Single Artwork" style="max-width: 250px; border-radius: 15px;">
+                </div>
+
+                <div class="single-info text-center mt-3">
+                    <h3 style="color: white;">"Tears Don't Fall"</h3>
+                    <p style="color: #ccc;">Out Now on all platforms</p>
+
+                    <div class="stream-links d-flex justify-content-center gap-3 mt-3">
+                        <a href="#" class="btn btn-outline-light btn-sm">
+                            <i class="fab fa-spotify"></i> Spotify
+                        </a>
+                        <a href="#" class="btn btn-outline-light btn-sm">
+                            <i class="fab fa-apple"></i> Apple Music
+                        </a>
+                        <a href="#" class="btn btn-outline-light btn-sm">
+                            <i class="fab fa-youtube"></i> YouTube
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT COLUMN - Upcoming Shows -->
+        <div class="col-lg-6 mb-4">
+            <div class="tour-dates p-4" style="background: rgba(0,0,0,0.3); border-radius: 20px; height: 100%;">
+                <h2 class="text-center mb-4" style="color: white;">Upcoming Shows</h2>
+
+                <div class="tour-list">
+                    <div class="tour-item d-flex justify-content-between align-items-center p-3 border-bottom" style="border-color: rgba(255,255,255,0.1);">
+                        <span class="date fw-bold" style="color: #ff0055;">JUN 25</span>
+                        <span class="venue" style="color: white;">The Whisky a Go Go</span>
+                        <span class="location" style="color: #ccc;">Los Angeles, CA</span>
+                        <button class="ticket-btn btn btn-sm btn-outline-light">Tickets →</button>
+                    </div>
+
+                    <div class="tour-item d-flex justify-content-between align-items-center p-3 border-bottom" style="border-color: rgba(255,255,255,0.1);">
+                        <span class="date fw-bold" style="color: #ff0055;">JUL 15</span>
+                        <span class="venue" style="color: white;">Saint Vitus Bar</span>
+                        <span class="location" style="color: #ccc;">Brooklyn, NY</span>
+                        <button class="ticket-btn btn btn-sm btn-outline-light">Tickets →</button>
+                    </div>
+
+                    <div class="tour-item d-flex justify-content-between align-items-center p-3 border-bottom" style="border-color: rgba(255,255,255,0.1);">
+                        <span class="date fw-bold" style="color: #ff0055;">AUG 05</span>
+                        <span class="venue" style="color: white;">The Underworld</span>
+                        <span class="location" style="color: #ccc;">London, UK</span>
+                        <button class="ticket-btn btn btn-sm btn-outline-light">Tickets →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div> <!-- End of row -->
+
+</div> <!-- End of container -->
 
 <br />
 <br />
-
-<!-- Trigger buttons -->
-
 
 <!-- Modal shell -->
 <div class="modal fade" id="homeModal" tabindex="-1" aria-hidden="true">
@@ -136,4 +150,3 @@
         });
     </script>
 }
-
