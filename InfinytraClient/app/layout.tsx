@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import NavbarClient from './components/NavbarClient';
+import AuthNavItem from './components/AuthNavItem';
+import { CartProvider } from './lib/cart-context';
+import { AuthProvider } from './lib/auth-context';
+import { FavoritesProvider } from './lib/favorites-context';
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import Script from "next/script";
@@ -36,6 +40,9 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col">
+        <AuthProvider>
+        <FavoritesProvider>
+        <CartProvider>
         <header>
           {/* Sticky navbar */}
           <nav
@@ -122,6 +129,12 @@ export default function RootLayout({
                       News & Tours
                     </Link>
                   </li>
+                  <li className="nav-item">
+                    <Link href="/gallery" className="nav-link" style={{ color: "white", fontSize: "20px", fontWeight: "bold" }}>
+                      Gallery
+                    </Link>
+                  </li>
+                  <AuthNavItem />
                 </ul>
               </div>
             </div>
@@ -160,6 +173,9 @@ export default function RootLayout({
           src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
           strategy="afterInteractive"
         />
+        </CartProvider>
+        </FavoritesProvider>
+        </AuthProvider>
       </body>
     </html>
     );

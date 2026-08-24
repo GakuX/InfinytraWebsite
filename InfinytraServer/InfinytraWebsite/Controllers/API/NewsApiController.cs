@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,50 +13,47 @@ namespace InfinytraWebsite.Controllers.API
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AlbumsApiController : ControllerBase
+    public class NewsApiController : ControllerBase
     {
         private readonly BandContext _context;
 
-        public AlbumsApiController(BandContext context)
+        public NewsApiController(BandContext context)
         {
             _context = context;
         }
 
-        // GET: api/AlbumsApi
+        // GET: api/NewsApi
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Album>>> GetAlbums()
+        public async Task<ActionResult<IEnumerable<NewsPost>>> GetNews()
         {
-            return await _context.Albums.ToListAsync();
+            return await _context.NewsPosts.OrderByDescending(n => n.PostedDate).ToListAsync();
         }
 
-        // GET: api/AlbumsApi/5
+        // GET: api/NewsApi/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Album>> GetAlbum(int id)
+        public async Task<ActionResult<NewsPost>> GetNewsPost(int id)
         {
-            var album = await _context.Albums.FindAsync(id);
+            var newsPost = await _context.NewsPosts.FindAsync(id);
 
-            if (album == null)
+            if (newsPost == null)
             {
                 return NotFound();
             }
 
-
-
-            return album;
+            return newsPost;
         }
 
-        // PUT: api/AlbumsApi/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // PUT: api/NewsApi/5
         [Authorize(Policy = "AdminOnly")]
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAlbum(int id, Album album)
+        public async Task<IActionResult> PutNewsPost(int id, NewsPost newsPost)
         {
-            if (id != album.Id)
+            if (id != newsPost.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(album).State = EntityState.Modified;
+            _context.Entry(newsPost).State = EntityState.Modified;
 
             try
             {
@@ -64,7 +61,7 @@ namespace InfinytraWebsite.Controllers.API
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!AlbumExists(id))
+                if (!NewsPostExists(id))
                 {
                     return NotFound();
                 }
@@ -77,38 +74,37 @@ namespace InfinytraWebsite.Controllers.API
             return NoContent();
         }
 
-        // POST: api/AlbumsApi
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // POST: api/NewsApi
         [Authorize(Policy = "AdminOnly")]
         [HttpPost]
-        public async Task<ActionResult<Album>> PostAlbum(Album album)
+        public async Task<ActionResult<NewsPost>> PostNewsPost(NewsPost newsPost)
         {
-            _context.Albums.Add(album);
+            _context.NewsPosts.Add(newsPost);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetAlbum", new { id = album.Id }, album);
+            return CreatedAtAction("GetNewsPost", new { id = newsPost.Id }, newsPost);
         }
 
-        // DELETE: api/AlbumsApi/5
+        // DELETE: api/NewsApi/5
         [Authorize(Policy = "AdminOnly")]
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAlbum(int id)
+        public async Task<IActionResult> DeleteNewsPost(int id)
         {
-            var album = await _context.Albums.FindAsync(id);
-            if (album == null)
+            var newsPost = await _context.NewsPosts.FindAsync(id);
+            if (newsPost == null)
             {
                 return NotFound();
             }
 
-            _context.Albums.Remove(album);
+            _context.NewsPosts.Remove(newsPost);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool AlbumExists(int id)
+        private bool NewsPostExists(int id)
         {
-            return _context.Albums.Any(e => e.Id == id);
+            return _context.NewsPosts.Any(e => e.Id == id);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,50 +13,47 @@ namespace InfinytraWebsite.Controllers.API
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AlbumsApiController : ControllerBase
+    public class TourDatesApiController : ControllerBase
     {
         private readonly BandContext _context;
 
-        public AlbumsApiController(BandContext context)
+        public TourDatesApiController(BandContext context)
         {
             _context = context;
         }
 
-        // GET: api/AlbumsApi
+        // GET: api/TourDatesApi
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Album>>> GetAlbums()
+        public async Task<ActionResult<IEnumerable<TourDate>>> GetTourDates()
         {
-            return await _context.Albums.ToListAsync();
+            return await _context.TourDates.OrderBy(t => t.ShowDate).ToListAsync();
         }
 
-        // GET: api/AlbumsApi/5
+        // GET: api/TourDatesApi/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Album>> GetAlbum(int id)
+        public async Task<ActionResult<TourDate>> GetTourDate(int id)
         {
-            var album = await _context.Albums.FindAsync(id);
+            var tourDate = await _context.TourDates.FindAsync(id);
 
-            if (album == null)
+            if (tourDate == null)
             {
                 return NotFound();
             }
 
-
-
-            return album;
+            return tourDate;
         }
 
-        // PUT: api/AlbumsApi/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // PUT: api/TourDatesApi/5
         [Authorize(Policy = "AdminOnly")]
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAlbum(int id, Album album)
+        public async Task<IActionResult> PutTourDate(int id, TourDate tourDate)
         {
-            if (id != album.Id)
+            if (id != tourDate.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(album).State = EntityState.Modified;
+            _context.Entry(tourDate).State = EntityState.Modified;
 
             try
             {
@@ -64,7 +61,7 @@ namespace InfinytraWebsite.Controllers.API
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!AlbumExists(id))
+                if (!TourDateExists(id))
                 {
                     return NotFound();
                 }
@@ -77,38 +74,37 @@ namespace InfinytraWebsite.Controllers.API
             return NoContent();
         }
 
-        // POST: api/AlbumsApi
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // POST: api/TourDatesApi
         [Authorize(Policy = "AdminOnly")]
         [HttpPost]
-        public async Task<ActionResult<Album>> PostAlbum(Album album)
+        public async Task<ActionResult<TourDate>> PostTourDate(TourDate tourDate)
         {
-            _context.Albums.Add(album);
+            _context.TourDates.Add(tourDate);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetAlbum", new { id = album.Id }, album);
+            return CreatedAtAction("GetTourDate", new { id = tourDate.Id }, tourDate);
         }
 
-        // DELETE: api/AlbumsApi/5
+        // DELETE: api/TourDatesApi/5
         [Authorize(Policy = "AdminOnly")]
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAlbum(int id)
+        public async Task<IActionResult> DeleteTourDate(int id)
         {
-            var album = await _context.Albums.FindAsync(id);
-            if (album == null)
+            var tourDate = await _context.TourDates.FindAsync(id);
+            if (tourDate == null)
             {
                 return NotFound();
             }
 
-            _context.Albums.Remove(album);
+            _context.TourDates.Remove(tourDate);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool AlbumExists(int id)
+        private bool TourDateExists(int id)
         {
-            return _context.Albums.Any(e => e.Id == id);
+            return _context.TourDates.Any(e => e.Id == id);
         }
     }
 }

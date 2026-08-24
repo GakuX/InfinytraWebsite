@@ -3,6 +3,10 @@ using InfinytraWebsite.Migrations;
 using InfinytraWebsite.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using InfinytraWebsite.Helpers;
 
 
 namespace InfinytraWebsite
@@ -22,7 +26,12 @@ namespace InfinytraWebsite
                                                          // Adds Swagger generation
             builder.Services.AddSwaggerGen();
             builder.Services.AddControllers()
-    .AddNewtonsoftJson();
+    .AddNewtonsoftJson(options =>
+    {
+        // Safety net alongside the [JsonIgnore] attributes on entity navigation properties -
+        // avoids a hard crash if a future entity/endpoint introduces a reference cycle.
+        options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+    });
 
             builder.Services.AddCors(options =>
             {
@@ -37,6 +46,27 @@ namespace InfinytraWebsite
 
             builder.Services.AddDbContext<BandContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+            var jwtSection = builder.Configuration.GetSection("Jwt");
+            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = jwtSection["Issuer"],
+                        ValidAudience = jwtSection["Audience"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSection["Key"]!))
+                    };
+                });
+
+            builder.Services.AddAuthorization(options =>
+            {
+                options.AddPolicy("AdminOnly", policy => policy.RequireClaim("IsAdmin", "true"));
+            });
 
             builder.Services.AddSession(options =>
                    {
@@ -67,6 +97,7 @@ namespace InfinytraWebsite
             app.UseRouting();
 
             app.UseCors("AllowAll");  // For React later
+            app.UseAuthentication();
             app.UseAuthorization();
 
 
@@ -424,6 +455,106 @@ namespace InfinytraWebsite
 
 
 
+                    // news posts
+                    if (!context.NewsPosts.Any(n => n.Title == "\"Where Vermillion Burns\" Out Now"))
+                    {
+                        context.NewsPosts.Add(new NewsPost
+                        {
+                            Title = "\"Where Vermillion Burns\" Out Now",
+                            Blurb = "Our debut album has officially dropped. Four tracks of everything we've been building toward - stream it everywhere.",
+                            PostedDate = new DateTime(2026, 6, 14)
+                        });
+                    }
+
+                    if (!context.NewsPosts.Any(n => n.Title == "New Single: \"Tears Don't Fall\""))
+                    {
+                        context.NewsPosts.Add(new NewsPost
+                        {
+                            Title = "New Single: \"Tears Don't Fall\"",
+                            Blurb = "The opening track from the album is out as a standalone single, with a run of shows to back it up.",
+                            PostedDate = new DateTime(2026, 7, 1)
+                        });
+                    }
+
+                    if (!context.NewsPosts.Any(n => n.Title == "Summer Tour Announced"))
+                    {
+                        context.NewsPosts.Add(new NewsPost
+                        {
+                            Title = "Summer Tour Announced",
+                            Blurb = "We're hitting the road across North America and the UK. Full dates below - more cities to be added soon.",
+                            PostedDate = new DateTime(2026, 8, 1)
+                        });
+                    }
+
+                    // tour dates
+                    if (!context.TourDates.Any(t => t.Venue == "The Whisky a Go Go"))
+                    {
+                        context.TourDates.Add(new TourDate
+                        {
+                            ShowDate = new DateTime(2026, 6, 25),
+                            Venue = "The Whisky a Go Go",
+                            Location = "Los Angeles, CA"
+                        });
+                    }
+
+                    if (!context.TourDates.Any(t => t.Venue == "Saint Vitus Bar"))
+                    {
+                        context.TourDates.Add(new TourDate
+                        {
+                            ShowDate = new DateTime(2026, 7, 15),
+                            Venue = "Saint Vitus Bar",
+                            Location = "Brooklyn, NY"
+                        });
+                    }
+
+                    if (!context.TourDates.Any(t => t.Venue == "The Underworld"))
+                    {
+                        context.TourDates.Add(new TourDate
+                        {
+                            ShowDate = new DateTime(2026, 8, 5),
+                            Venue = "The Underworld",
+                            Location = "London, UK"
+                        });
+                    }
+
+                    // admin account
+                    var adminUser = context.Users.FirstOrDefault(u => u.Username == "admin");
+                    if (adminUser == null)
+                    {
+                        context.Users.Add(new User
+                        {
+                            Username = "admin",
+                            Email = "admin@infinytra.local",
+                            PasswordHash = PasswordHasher.Hash("222222"),
+                            CreatedDate = DateTime.UtcNow,
+                            IsAdmin = true
+                        });
+                    }
+                    else
+                    {
+                        adminUser.PasswordHash = PasswordHasher.Hash("222222");
+                        adminUser.IsAdmin = true;
+                    }
+
+                    // photo gallery
+                    if (!context.GalleryImages.Any())
+                    {
+                        context.GalleryImages.AddRange(
+                            new GalleryImage { ImageURL = "/images/garylogoimage.jpg", Caption = "Gary Tjokro - Lead Guitar", Category = "Band", UploadedDate = new DateTime(2026, 5, 1) },
+                            new GalleryImage { ImageURL = "/images/adan.jpg", Caption = "Adan Riasat - Rhythm Guitar & Vocals", Category = "Band", UploadedDate = new DateTime(2026, 5, 2) },
+                            new GalleryImage { ImageURL = "/images/fernando.jpg", Caption = "Fernando Trujillo - Drums", Category = "Band", UploadedDate = new DateTime(2026, 5, 3) },
+                            new GalleryImage { ImageURL = "/images/alhassan.jpg", Caption = "Alhassan Shnoot - Bass", Category = "Band", UploadedDate = new DateTime(2026, 5, 4) },
+                            new GalleryImage { ImageURL = "/images/redkingvjackson.png", Caption = "Jackson King V", Category = "Gear", UploadedDate = new DateTime(2026, 5, 5) },
+                            new GalleryImage { ImageURL = "/images/whitedrums.jpg", Caption = "Backline setup", Category = "Gear", UploadedDate = new DateTime(2026, 5, 6) },
+                            new GalleryImage { ImageURL = "/images/vermillion.png", Caption = "Where Vermillion Burns - cover art", Category = "Album", UploadedDate = new DateTime(2026, 6, 14) },
+                            new GalleryImage { ImageURL = "/images/poison.webp", Caption = "Tears Don't Fall - single art", Category = "Album", UploadedDate = new DateTime(2026, 7, 1) }
+                        );
+                    }
+
+                    context.SaveChanges();
+
+
+
                     // Configure the HTTP request pipeline.
                     if (!app.Environment.IsDevelopment())
                     {
@@ -439,7 +570,7 @@ namespace InfinytraWebsite
                     app.UseCors("AllowAll");
                     app.UseSession();
 
-
+                    app.UseAuthentication();
                     app.UseAuthorization();
 
                     app.MapControllerRoute(

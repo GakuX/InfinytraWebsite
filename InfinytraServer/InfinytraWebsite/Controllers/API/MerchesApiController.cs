@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -44,6 +45,7 @@ namespace InfinytraWebsite.Controllers.API
 
         // PUT: api/MerchesApi/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize(Policy = "AdminOnly")]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutMerch(int id, Merch merch)
         {
@@ -75,6 +77,7 @@ namespace InfinytraWebsite.Controllers.API
 
         // POST: api/MerchesApi
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize(Policy = "AdminOnly")]
         [HttpPost]
         public async Task<ActionResult<Merch>> PostMerch(Merch merch)
         {
@@ -85,6 +88,7 @@ namespace InfinytraWebsite.Controllers.API
         }
 
         // DELETE: api/MerchesApi/5
+        [Authorize(Policy = "AdminOnly")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteMerch(int id)
         {
