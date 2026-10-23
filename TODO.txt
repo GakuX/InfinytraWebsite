@@ -1,0 +1,27 @@
+Phase 1 (Week 1) - Add APIs
+Add API controllers alongside MVC
+
+Test with Postman or browser
+
+Both systems work simultaneously
+
+Phase 2 (Week 2) - Create React App
+Create React app in client folder
+
+Call your APIs
+
+Run React on port 3000
+
+Phase 3 (Week 3) - Replace Features One by One
+Replace Members page with React version
+
+Replace Merch page with React version
+
+Replace Cart with React version
+
+Phase 4 (Week 4) - Clean Up
+Delete MVC Views (optional)
+
+Delete MVC Controllers (optional)
+
+Keep API controllers only
